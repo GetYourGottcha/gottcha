@@ -1024,6 +1024,34 @@ const STATEMENTS = [
 
 
 // ══════════════════════════════════════
+// LEGACY MIGRATION MAP (old id -> new id, for v1 saved files)
+const LEGACY_ID_MAP = {
+  'pfl01':'pol14',
+  'pfl02':'pol16',
+  'pfl03':'pfl04',
+  'pfl04':'g16',
+  'pfl05':'pfl06',
+  'pfl06':'ph16',
+  'pfl09':'pfl10',
+  'pfl10':'u16',
+  'pfl11':'pfl12',
+  'pfl12':'z16',
+  'pfl15':'pfl16',
+  'pfl16':'b16',
+  'pfl19':'pfl20',
+  'pfl20':'fa16',
+  'pfl21':'k16',
+  'pfl23':'pfl24',
+  'pfl24':'ge16',
+  'pfl25':'h16',
+  'pfl28':'sx16',
+  'pfl30':'ab16',
+  'pfl31':'pfl32',
+  'pol14':'pfl02',
+};
+const LEGACY_DROP_IDS = new Set(['pfl07','pfl13','pfl17','pfl27','pfl29','pfl32']);
+const CURRENT_VERSION = 2;
+
 // CONSTANTS
 // ══════════════════════════════════════
 const PFLICHT_STATEMENTS = STATEMENTS.filter(s => s.pflicht);
@@ -1341,8 +1369,9 @@ function renderPflicht(){
   const stmt=PFLICHT_STATEMENTS[pflIdx];
   document.getElementById('pfl-text').textContent=stmt.text;
   document.getElementById('pfl-category').textContent=stmt.cat;
-  document.getElementById('pfl-progress-fill').style.width=Math.round((pflIdx/total)*100)+'%';
-  document.getElementById('pfl-progress-label').textContent=(pflIdx+1)+' / '+total;
+  const answered=PFLICHT_STATEMENTS.filter(s=>state.answers[s.id]!==undefined).length;
+  document.getElementById('pfl-progress-fill').style.width=Math.round((answered/total)*100)+'%';
+  document.getElementById('pfl-progress-label').textContent=answered+' / '+total+' beantwortet';
   const saved=state.answers[stmt.id];
   pflScale=saved!==undefined?saved:null;
   document.querySelectorAll('#screen-pflicht .scale-btn').forEach(b=>b.classList.toggle('selected',parseInt(b.dataset.val)===pflScale));
@@ -1363,11 +1392,15 @@ function pflNext(){
   clearTimeout(_pflTimer); _pflTimer=null;
   const stmt=PFLICHT_STATEMENTS[pflIdx];
   const isLast=pflIdx>=PFLICHT_STATEMENTS.length-1;
-  if(isLast && pflScale===null){ toast('Bitte beantworte die Frage zuerst.'); return; }
   if(pflScale!==null) state.answers[stmt.id]=pflScale;
   saveToStorage();
-  if(isLast){ startStatements(); }
-  else { pflIdx++; pflScale=null; renderPflicht(); }
+  if(isLast){
+    const allAnswered=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
+    if(!allAnswered){ toast('Bitte beantworte noch alle Fragen – du kannst auch Enthaltung wählen.'); return; }
+    startStatements();
+  } else {
+    pflIdx++; pflScale=null; renderPflicht();
+  }
 }
 
 function pflPrev(){
@@ -1554,14 +1587,20 @@ function renderMyProfile(){
 // ══════════════════════════════════════
 function getCategoryAverages(answers){
   const cats={};
-  [...PFLICHT_STATEMENTS,...REGULAR_STATEMENTS].forEach(s=>{
-    if(!cats[s.main]) cats[s.main]={sum:0,count:0};
+  const REGULAR_WEIGHT=0.1;
+  PFLICHT_STATEMENTS.forEach(s=>{
+    if(!cats[s.main]) cats[s.main]={wsum:0,wtotal:0};
     const v=answers[s.id];
-    if(v!==undefined&&v>0){ cats[s.main].sum+=v; cats[s.main].count++; }
+    if(v!==undefined&&v>0){ cats[s.main].wsum+=v*1; cats[s.main].wtotal+=1; }
+  });
+  REGULAR_STATEMENTS.forEach(s=>{
+    if(!cats[s.main]) cats[s.main]={wsum:0,wtotal:0};
+    const v=answers[s.id];
+    if(v!==undefined&&v>0){ cats[s.main].wsum+=v*REGULAR_WEIGHT; cats[s.main].wtotal+=REGULAR_WEIGHT; }
   });
   const result={};
   CATEGORIES.forEach(cat=>{
-    result[cat]=cats[cat]&&cats[cat].count>0?cats[cat].sum/cats[cat].count/5:0;
+    result[cat]=cats[cat]&&cats[cat].wtotal>0?cats[cat].wsum/cats[cat].wtotal/5:0;
   });
   return result;
 }
@@ -1594,18 +1633,23 @@ function drawMyRadar(){
   // create fake stmts array from categories for the overlay
   const catStmts=orderedCats.map((c,i)=>({id:'cat_'+i,text:c,cat:c,main:c}));
   buildLabelOverlay(canvas,canvas._activeIdx||[],labels,catStmts,ds,popup,()=>{
-    // on swap: update mainBubbleOrder
     const newOrder=catStmts.map(s=>CATEGORIES.indexOf(s.text));
     state.mainBubbleOrder=newOrder;
     saveToStorage();
     drawMyRadar();
+  },(catName)=>{
+    _pinnedCat=catName;
+    renderMyCatAccordion();
   });
 }
 
 function renderMyCatAccordion(){
   const acc=document.getElementById('my-cat-accordion'); acc.innerHTML='';
   if(!state.catOrder) state.catOrder={};
-  CATEGORIES.forEach(cat=>{
+  const orderedCats=_pinnedCat
+    ? [_pinnedCat,...CATEGORIES.filter(c=>c!==_pinnedCat)]
+    : CATEGORIES;
+  orderedCats.forEach(cat=>{
     // get base stmts (regular + pflicht combined)
     const base=[...PFLICHT_STATEMENTS.filter(s=>s.main===cat),...REGULAR_STATEMENTS.filter(s=>s.main===cat)];
     // restore saved order if available
@@ -1660,8 +1704,9 @@ function renderMyCatAccordion(){
 // ── AXIS LABEL OVERLAY BUTTONS ──
 const _swapState={};
 const _browsedIdx={};
+let _pinnedCat=null;
 
-function buildLabelOverlay(canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn){
+function buildLabelOverlay(canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn,onBrowseChange){
   let wrap=canvas.parentElement;
   if(!wrap||!wrap.classList.contains('bubble-wrap')){
     wrap=document.createElement('div');
@@ -1705,7 +1750,7 @@ function buildLabelOverlay(canvas,activeIdx,labels,stmts,datasets,popupEl,redraw
     const title=document.createElementNS(svgNS,'title');
     title.textContent=labels[ai];
     path.appendChild(title);
-    path.addEventListener('click',()=>handleRingClick(i,paths,canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn));
+    path.addEventListener('click',()=>handleRingClick(i,paths,canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn,onBrowseChange));
     rSvg.appendChild(path);
     paths.push(path);
   });
@@ -1713,7 +1758,7 @@ function buildLabelOverlay(canvas,activeIdx,labels,stmts,datasets,popupEl,redraw
   wrap.appendChild(rSvg);
 }
 
-function handleRingClick(i,paths,canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn){
+function handleRingClick(i,paths,canvas,activeIdx,labels,stmts,datasets,popupEl,redrawFn,onBrowseChange){
   const id=canvas.id, acc2=getAccent2();
   const resetAll=()=>paths.forEach(p=>{p.setAttribute('fill','var(--surface)');p.setAttribute('stroke','var(--border)');});
   const setBrowse=idx=>{paths[idx].setAttribute('fill',acc2+'18');paths[idx].setAttribute('stroke',acc2+'88');};
@@ -1743,8 +1788,18 @@ function handleRingClick(i,paths,canvas,activeIdx,labels,stmts,datasets,popupEl,
   const prev=_browsedIdx[id];
   if(prev!==null && prev!==i && prev!==_swapState[id]) resetAll();
 
+  // toggle: clicking same browsed segment deselects
+  if(prev===i && _swapState[id]===null){
+    _browsedIdx[id]=null;
+    resetAll();
+    popupEl.style.display='none';
+    if(onBrowseChange) onBrowseChange(null);
+    return;
+  }
+
   _browsedIdx[id]=i;
   setBrowse(i);
+  if(onBrowseChange) onBrowseChange(stmts[activeIdx[i]]?.text||null);
   // keep swap-pending highlight if active
   if(_swapState[id]!==null) setSwap(_swapState[id]);
 
@@ -2188,11 +2243,25 @@ function exportEnthaltungen(){
 }
 
 function exportProfile(){
-  const data=JSON.stringify({v:1,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null},null,2);
+  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null},null,2);
   const blob=new Blob([data],{type:'application/json'});
   const url=URL.createObjectURL(blob); const a=document.createElement('a');
   a.href=url; a.download='gottcha_'+(state.profile?.nickname||'profil')+'.json'; a.click();
   URL.revokeObjectURL(url); toast('Gespeichert ✓');
+}
+function migrateAnswers(oldAnswers){
+  const allIds=new Set(STATEMENTS.map(s=>s.id));
+  const migrated={};
+  let kept=0, remapped=0, dropped=0;
+  Object.entries(oldAnswers).forEach(([oldId,val])=>{
+    if(LEGACY_DROP_IDS.has(oldId)){ dropped++; return; }
+    const newId=LEGACY_ID_MAP[oldId]||oldId;
+    if(allIds.has(newId)){
+      migrated[newId]=val;
+      if(newId!==oldId) remapped++; else kept++;
+    } else dropped++;
+  });
+  return {migrated, kept, remapped, dropped};
 }
 function loadProfile(e){
   const file=e.target.files[0]; if(!file) return;
@@ -2201,14 +2270,32 @@ function loadProfile(e){
     try{
       const data=JSON.parse(ev.target.result);
       if(data.profile&&data.answers){
-        state.profile=data.profile; state.answers=data.answers;
+        state.profile=data.profile;
         state.catOrder=data.catOrder||{};
         state.mainBubbleOrder=data.mainBubbleOrder||null;
-        state.currentIndex=Object.keys(data.answers).length;
+        if(!data.v || data.v < CURRENT_VERSION){
+          const {migrated,kept,remapped,dropped}=migrateAnswers(data.answers);
+          state.answers=migrated;
+          const msg=`Alte Version erkannt. ${kept+remapped} Antworten übernommen${remapped?' ('+remapped+' neu zugeordnet)':''}${dropped?' · '+dropped+' entfallen':''}.`;
+          setTimeout(()=>toast(msg),400);
+        } else {
+          state.answers=data.answers;
+        }
+        state.currentIndex=Object.keys(state.answers).length;
         state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
         saveToStorage();
-        if(incomingProfile) showScreen('screen-compare'); else showScreen('screen-my-profile');
-        toast('Profil geladen ✓');
+        if(incomingProfile){
+          showScreen('screen-compare');
+        } else {
+          const missingPflicht=PFLICHT_STATEMENTS.filter(s=>state.answers[s.id]===undefined);
+          if(missingPflicht.length){
+            pflIdx=0; pflScale=null;
+            showScreen('screen-pflicht'); renderPflicht();
+          } else {
+            showScreen('screen-my-profile');
+          }
+        }
+        if(data.v && data.v >= CURRENT_VERSION) toast('Profil geladen ✓');
       } else toast('Ungültige Datei.');
     }catch(err){ toast('Fehler beim Laden.'); }
   };
