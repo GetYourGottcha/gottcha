@@ -476,7 +476,11 @@
     <button class="btn btn-ghost" onclick="exportProfile()">Als Datei speichern</button>
   </div>
   <button class="btn btn-ghost" onclick="showScreen('screen-edit-profile')">Profil bearbeiten</button>
-  <button class="btn btn-ghost" onclick="exportEnthaltungen()">↓ Enthaltungen exportieren</button>
+  <div class="card">
+    <p class="label">Freies Feedback</p>
+    <textarea id="feedback-text" placeholder="Was hat dir gefehlt? Was war unklar? Was würdest du anders machen?" style="min-height:100px;display:none"></textarea>
+    <button class="btn btn-ghost" onclick="exportEnthaltungen()" style="margin-top:10px">↓ Feedback exportieren</button>
+  </div>
   <div class="divider"></div>
   <button class="btn btn-ghost" onclick="showScreen('screen-start')">← Startseite</button>
   <button class="btn btn-ghost" style="font-size:.8rem;color:var(--danger);border-color:var(--danger)40" onclick="showBeendenModal()">Gottcha beenden</button>
@@ -2130,6 +2134,15 @@ function sendBackLink(){
 // EXPORT / IMPORT
 // ══════════════════════════════════════
 function exportEnthaltungen(){
+  const textarea=document.getElementById('feedback-text');
+  if(textarea && textarea.style.display==='none'){
+    const attach=confirm('Feedback anhängen? (sonst werden nur Rohdaten ausgewertet)');
+    if(attach){
+      textarea.style.display='block';
+      textarea.focus();
+      return;
+    }
+  }
   const allStmts=[...PFLICHT_STATEMENTS,...REGULAR_STATEMENTS];
   const lines=['Gottcha – Enthaltungen','Erstellt: '+new Date().toLocaleDateString('de-DE'),''];
   let found=false;
@@ -2141,7 +2154,9 @@ function exportEnthaltungen(){
     stmts.forEach(s=>lines.push('  – '+s.text));
     lines.push('');
   });
-  if(!found){ toast('Keine Enthaltungen vorhanden.'); return; }
+  const feedback=(textarea?.value||'').trim();
+  if(feedback){ lines.push('──────────────────────────','Freies Feedback','',feedback); }
+  if(!found&&!feedback){ toast('Keine Enthaltungen und kein Feedback vorhanden.'); return; }
   const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
