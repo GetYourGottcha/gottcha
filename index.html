@@ -417,13 +417,15 @@
 
   <div class="scale-wrapper">
     <div class="scale-labels"><span>stimme nicht zu</span><span>stimme voll zu</span></div>
-    <div class="scale-buttons">
-      <button class="scale-btn skip" data-val="0" onclick="selectScale(0)">Enth.</button>
+    <div class="scale-buttons" style="grid-template-columns:repeat(5,1fr)">
       <button class="scale-btn" data-val="1" onclick="selectScale(1)">1</button>
       <button class="scale-btn" data-val="2" onclick="selectScale(2)">2</button>
       <button class="scale-btn" data-val="3" onclick="selectScale(3)">3</button>
       <button class="scale-btn" data-val="4" onclick="selectScale(4)">4</button>
       <button class="scale-btn" data-val="5" onclick="selectScale(5)">5</button>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <button class="scale-btn skip" data-val="0" onclick="selectScale(0)" style="width:36%;aspect-ratio:unset;padding:7px 0;font-size:.7rem">Enthaltung</button>
     </div>
   </div>
 
