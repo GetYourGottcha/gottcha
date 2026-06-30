@@ -666,57 +666,57 @@
 // ══════════════════════════════════════
 const STATEMENTS = [
 
-// ══ PFLICHT-STATEMENTS (je 2 pro Kategorie) ══
+// ══ PFLICHT (je 1 neu + 1 alt, 2 pro Kategorie) ══
 
-{id:'pfl01',text:'Klimaschutz darf Jobs kosten.',cat:'Politik',main:'Politik',pflicht:true},
-{id:'pfl02',text:'Wer nicht wählen geht, sollte sich nicht beschweren dürfen.',cat:'Politik',main:'Politik',pflicht:true},
+{id:'pfl01',text:'Politik interessiert mich.',cat:'Politik',main:'Politik',pflicht:true},
+{id:'pfl02',text:'Freiheit ist wichtiger als Sicherheit.',cat:'Politik',main:'Politik',pflicht:true},
 
-{id:'pfl03',text:'Geschichte wird von den Siegern geschrieben.',cat:'Geschichte',main:'Geschichte',pflicht:true},
-{id:'pfl04',text:'Länder sollten für historisches Unrecht ihrer Vorfahren zahlen.',cat:'Geschichte',main:'Geschichte',pflicht:true},
+{id:'pfl03',text:'Ich informiere mich gerne über historische Ereignisse.',cat:'Geschichte',main:'Geschichte',pflicht:true},
+{id:'pfl04',text:'Geschichte wird von den Siegern geschrieben.',cat:'Geschichte',main:'Geschichte',pflicht:true},
 
-{id:'pfl05',text:'Der freie Wille ist eine Illusion.',cat:'Philosophie',main:'Philosophie',pflicht:true},
-{id:'pfl06',text:'Menschen überschätzen ihre Fähigkeit, rational zu entscheiden.',cat:'Philosophie',main:'Philosophie',pflicht:true},
+{id:'pfl05',text:'Philosophische Fragen ziehen mich an.',cat:'Philosophie',main:'Philosophie',pflicht:true},
+{id:'pfl06',text:'Der freie Wille ist eine Illusion.',cat:'Philosophie',main:'Philosophie',pflicht:true},
 
-{id:'pfl07',text:'Für ein gutes Wochenende brauche ich keinen Plan.',cat:'Freizeit',main:'Freizeit',pflicht:true},
+{id:'pfl07',text:'Freizeit hat in meinem Leben einen hohen Stellenwert.',cat:'Freizeit',main:'Freizeit',pflicht:true},
 {id:'pfl08',text:'Abenteuer sind wichtiger als Komfort.',cat:'Freizeit',main:'Freizeit',pflicht:true},
 
-{id:'pfl09',text:'Social Media hat mehr Schaden angerichtet als Nutzen gebracht.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien',pflicht:true},
-{id:'pfl10',text:'Kunst darf beleidigen.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien',pflicht:true},
+{id:'pfl09',text:'Medien und Unterhaltung sind ein wichtiger Teil meines Alltags.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien',pflicht:true},
+{id:'pfl10',text:'Social Media hat mehr Schaden angerichtet als Nutzen gebracht.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien',pflicht:true},
 
-{id:'pfl11',text:'Scheitern ist wertvoller als Erfolg.',cat:'Ziele',main:'Ziele',pflicht:true},
-{id:'pfl12',text:'Wer keinen Ehrgeiz hat, ist mir suspekt.',cat:'Ziele',main:'Ziele',pflicht:true},
+{id:'pfl11',text:'Persönliche Ambitionen sind mir wichtig.',cat:'Ziele',main:'Ziele',pflicht:true},
+{id:'pfl12',text:'Scheitern ist wertvoller als Erfolg.',cat:'Ziele',main:'Ziele',pflicht:true},
 
-{id:'pfl13',text:'Spiritualität und Wissenschaft widersprechen sich nicht.',cat:'Glaube',main:'Glaube',pflicht:true},
+{id:'pfl13',text:'Glaube und Spiritualität spielen eine große Rolle in meinem Leben.',cat:'Glaube',main:'Glaube',pflicht:true},
 {id:'pfl14',text:'Atheismus ist auch eine Form von Glauben.',cat:'Glaube',main:'Glaube',pflicht:true},
 
-{id:'pfl15',text:'Liebe allein reicht für eine gute Beziehung nicht aus.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe',pflicht:true},
-{id:'pfl16',text:'Untreue ist in jedem Fall ein Vertrauensbruch – aber nicht immer ein Beziehungsende.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe',pflicht:true},
+{id:'pfl15',text:'Beziehungen zu anderen Menschen sind mir wichtig.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe',pflicht:true},
+{id:'pfl16',text:'Liebe allein reicht für eine gute Beziehung nicht aus.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe',pflicht:true},
 
-{id:'pfl17',text:'Wer sagt, Geld macht nicht glücklich, war nie wirklich arm.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard',pflicht:true},
+{id:'pfl17',text:'Ich will finanziell ausgesorgt haben.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard',pflicht:true},
 {id:'pfl18',text:'Erben verstärkt ungerechte Chancen.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard',pflicht:true},
 
-{id:'pfl19',text:'Kinder brauchen klare Grenzen mehr als Freiheit.',cat:'Familie & Erziehung',main:'Familie & Erziehung',pflicht:true},
-{id:'pfl20',text:'Man kann seine Eltern lieben und trotzdem den Kontakt abbrechen.',cat:'Familie & Erziehung',main:'Familie & Erziehung',pflicht:true},
+{id:'pfl19',text:'Meine Familie ist mir sehr wichtig.',cat:'Familie & Erziehung',main:'Familie & Erziehung',pflicht:true},
+{id:'pfl20',text:'Kinder brauchen klare Grenzen mehr als Freiheit.',cat:'Familie & Erziehung',main:'Familie & Erziehung',pflicht:true},
 
-{id:'pfl21',text:'Stress ist heute ein Statussymbol.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit',pflicht:true},
+{id:'pfl21',text:'Meine körperliche und mentale Gesundheit hat für mich hohe Priorität.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit',pflicht:true},
 {id:'pfl22',text:'Alkohol ist gefährlicher als viele illegale Drogen.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit',pflicht:true},
 
-{id:'pfl23',text:'Cancel Culture schadet dem offenen Diskurs.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben',pflicht:true},
-{id:'pfl24',text:'Wer schweigt, macht sich manchmal mitschuldig.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben',pflicht:true},
+{id:'pfl23',text:'Gerechtigkeit liegt mir am Herzen.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben',pflicht:true},
+{id:'pfl24',text:'Cancel Culture schadet dem offenen Diskurs.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben',pflicht:true},
 
-{id:'pfl25',text:'Galgenhumor ist eine Form von Stärke.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit',pflicht:true},
+{id:'pfl25',text:'Leichtigkeit ist mir im Leben sehr wichtig.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit',pflicht:true},
 {id:'pfl26',text:'Ein Mensch ohne Humor ist schwer zu ertragen.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit',pflicht:true},
 
-{id:'pfl27',text:'Sex ohne emotionale Verbindung kann völlig erfüllend sein.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild',pflicht:true},
-{id:'pfl28',text:'Fremdgehen ist manchmal eine verständliche Reaktion auf eine kaputte Beziehung.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild',pflicht:true},
+{id:'pfl27',text:'Sexualität und Körperbild sind Themen, über die ich offen reden kann.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild',pflicht:true},
+{id:'pfl28',text:'Sex ist wichtig für eine gesunde Beziehung.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild',pflicht:true},
 
-{id:'pfl29',text:'Burnout ist oft ein Zeichen, dass man den falschen Job macht – nicht zu viel arbeitet.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf',pflicht:true},
-{id:'pfl30',text:'Man darf seinen Chef anlügen.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf',pflicht:true},
+{id:'pfl29',text:'Meine Karriere hat hohe Priorität für mich.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf',pflicht:true},
+{id:'pfl30',text:'Burnout ist oft ein Zeichen, dass man den falschen Job macht.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf',pflicht:true},
 
-{id:'pfl31',text:'Aktive Sterbehilfe sollte legal und zugänglich sein.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit',pflicht:true},
-{id:'pfl32',text:'Unsterblichkeit wäre kein Segen.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit',pflicht:true},
+{id:'pfl31',text:'Vergänglichkeit macht das Leben wertvoll.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit',pflicht:true},
+{id:'pfl32',text:'Aktive Sterbehilfe sollte legal und zugänglich sein.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit',pflicht:true},
 
-// ══ POLITIK (15) ══
+// ══ POLITIK (16) ══
 
 {id:'pol01',text:'Der Staat greift zu sehr in das Leben der Bürger ein.',cat:'Politik',main:'Politik'},
 {id:'pol02',text:'Reiche sollten deutlich mehr Steuern zahlen als heute.',cat:'Politik',main:'Politik'},
@@ -731,10 +731,11 @@ const STATEMENTS = [
 {id:'pol11',text:'Pressefreiheit ist wichtiger als Persönlichkeitsschutz.',cat:'Politik',main:'Politik'},
 {id:'pol12',text:'Soziale Medien sollten stärker reguliert werden.',cat:'Politik',main:'Politik'},
 {id:'pol13',text:'Es gibt Situationen, in denen ziviler Ungehorsam gerechtfertigt ist.',cat:'Politik',main:'Politik'},
-{id:'pol14',text:'Freiheit ist wichtiger als Sicherheit.',cat:'Politik',main:'Politik'},
+{id:'pol14',text:'Klimaschutz darf Jobs kosten.',cat:'Politik',main:'Politik'},
 {id:'pol15',text:'Der Staat sollte Vermögen stärker umverteilen.',cat:'Politik',main:'Politik'},
+{id:'pol16',text:'Wer nicht wählen geht, sollte sich nicht beschweren dürfen.',cat:'Politik',main:'Politik'},
 
-// ══ GESCHICHTE (15) ══
+// ══ GESCHICHTE (16) ══
 
 {id:'g01',text:'Aus der Geschichte lernen wir vor allem, dass wir nichts lernen.',cat:'Geschichte',main:'Geschichte'},
 {id:'g02',text:'Kolonialismus hat die Welt nachhaltig beschädigt – und das spüren wir heute noch.',cat:'Geschichte',main:'Geschichte'},
@@ -751,8 +752,9 @@ const STATEMENTS = [
 {id:'g13',text:'Ohne die Vergangenheit zu kennen, kann man die Gegenwart nicht verstehen.',cat:'Geschichte',main:'Geschichte'},
 {id:'g14',text:'Historische Ereignisse lassen sich nicht objektiv beurteilen.',cat:'Geschichte',main:'Geschichte'},
 {id:'g15',text:'Gesellschaften neigen dazu, ihre eigene Vergangenheit zu beschönigen.',cat:'Geschichte',main:'Geschichte'},
+{id:'g16',text:'Länder sollten für historisches Unrecht ihrer Vorfahren zahlen.',cat:'Geschichte',main:'Geschichte'},
 
-// ══ PHILOSOPHIE (15) ══
+// ══ PHILOSOPHIE (16) ══
 
 {id:'ph01',text:'Es gibt kein objektives Richtig oder Falsch – nur Perspektiven.',cat:'Philosophie',main:'Philosophie'},
 {id:'ph02',text:'Das Leben hat keinen Sinn – und das ist eigentlich befreiend.',cat:'Philosophie',main:'Philosophie'},
@@ -769,8 +771,9 @@ const STATEMENTS = [
 {id:'ph13',text:'Der Wunsch nach Kontrolle ist einer der häufigsten Gründe für Unglück.',cat:'Philosophie',main:'Philosophie'},
 {id:'ph14',text:'„Gott ist tot." – Nietzsche hatte recht.',cat:'Philosophie',main:'Philosophie'},
 {id:'ph15',text:'Ehrlichkeit ist wichtiger als Freundlichkeit.',cat:'Philosophie',main:'Philosophie'},
+{id:'ph16',text:'Menschen überschätzen ihre Fähigkeit, rational zu entscheiden.',cat:'Philosophie',main:'Philosophie'},
 
-// ══ FREIZEIT (15) ══
+// ══ FREIZEIT (16) ══
 
 {id:'f01',text:'Zeit allein ist genauso wichtig wie Zeit mit anderen.',cat:'Freizeit',main:'Freizeit'},
 {id:'f02',text:'Sport ist ein wichtiger Teil meines Lebens.',cat:'Freizeit',main:'Freizeit'},
@@ -787,8 +790,9 @@ const STATEMENTS = [
 {id:'f13',text:'Die schönsten Momente lassen sich nicht planen.',cat:'Freizeit',main:'Freizeit'},
 {id:'f14',text:'Kochen ist eine Liebessprache.',cat:'Freizeit',main:'Freizeit'},
 {id:'f15',text:'Freizeit wird wertvoller, je älter man wird.',cat:'Freizeit',main:'Freizeit'},
+{id:'f16',text:'Ein Wochenende ohne Plan ist das beste Wochenende.',cat:'Freizeit',main:'Freizeit'},
 
-// ══ UNTERHALTUNG / MEDIEN (15) ══
+// ══ UNTERHALTUNG / MEDIEN (16) ══
 
 {id:'u01',text:'Algorithmen entscheiden längst, was ich für wichtig halte.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
 {id:'u02',text:'Ein gutes Buch schlägt jeden Film.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
@@ -805,8 +809,9 @@ const STATEMENTS = [
 {id:'u13',text:'Empfehlungsalgorithmen kennen meinen Geschmack besser als meine Freunde.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
 {id:'u14',text:'Nachrichten zu lesen macht das Leben schwerer, nicht leichter.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
 {id:'u15',text:'Gute Musik kann einen schlechten Tag retten.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
+{id:'u16',text:'Kunst darf beleidigen.',cat:'Unterhaltung/Medien',main:'Unterhaltung/Medien'},
 
-// ══ ZIELE (15) ══
+// ══ ZIELE (16) ══
 
 {id:'z01',text:'Disziplin ist wichtiger als Motivation.',cat:'Ziele',main:'Ziele'},
 {id:'z02',text:'Ein Leben ohne große Ziele kann genauso erfüllt sein.',cat:'Ziele',main:'Ziele'},
@@ -823,8 +828,9 @@ const STATEMENTS = [
 {id:'z13',text:'Menschen überschätzen Talent und unterschätzen Ausdauer.',cat:'Ziele',main:'Ziele'},
 {id:'z14',text:'Ein erfülltes Leben braucht keine außergewöhnlichen Leistungen.',cat:'Ziele',main:'Ziele'},
 {id:'z15',text:'Man bereut meistens die Dinge, die man nicht getan hat.',cat:'Ziele',main:'Ziele'},
+{id:'z16',text:'Wer keinen Ehrgeiz hat, ist mir suspekt.',cat:'Ziele',main:'Ziele'},
 
-// ══ GLAUBE (15) ══
+// ══ GLAUBE (16) ══
 
 {id:'gl01',text:'Es gibt etwas, das größer ist als wir – auch wenn man es nicht benennen kann.',cat:'Glaube',main:'Glaube'},
 {id:'gl02',text:'Wer an Gott glaubt, ist nicht weniger rational als jemand, der es nicht tut.',cat:'Glaube',main:'Glaube'},
@@ -841,8 +847,9 @@ const STATEMENTS = [
 {id:'gl13',text:'Es ist wahrscheinlicher, dass wir Teil von etwas Größerem sind, als dass wir allein sind.',cat:'Glaube',main:'Glaube'},
 {id:'gl14',text:'Menschen brauchen etwas, das größer ist als sie selbst – ob Religion oder nicht.',cat:'Glaube',main:'Glaube'},
 {id:'gl15',text:'Wer keinen Glauben hat – an was auch immer – hat es schwerer im Leben.',cat:'Glaube',main:'Glaube'},
+{id:'gl16',text:'Ich tausche mich gerne über Glauben und Spiritualität aus.',cat:'Glaube',main:'Glaube'},
 
-// ══ BEZIEHUNGEN & LIEBE (15) ══
+// ══ BEZIEHUNGEN & LIEBE (16) ══
 
 {id:'b01',text:'Man kann mehrere Menschen gleichzeitig lieben.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
 {id:'b02',text:'Eifersucht ist ein Zeichen von Unsicherheit, nicht von Liebe.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
@@ -859,8 +866,9 @@ const STATEMENTS = [
 {id:'b13',text:'Wahre Freundschaft zeigt sich erst in Krisen.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
 {id:'b14',text:'Die meisten Menschen haben Angst vor echter Nähe und nennen es Unabhängigkeit.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
 {id:'b15',text:'Es gibt wahre Liebe – aber sie sieht anders aus als im Film.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
+{id:'b16',text:'Untreue ist in jedem Fall ein Vertrauensbruch – aber nicht immer ein Beziehungsende.',cat:'Beziehungen & Liebe',main:'Beziehungen & Liebe'},
 
-// ══ GELD & LEBENSSTANDARD (15) ══
+// ══ GELD & LEBENSSTANDARD (16) ══
 
 {id:'m01',text:'Nachhaltiger Konsum ist ein Luxus der Privilegierten.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
 {id:'m02',text:'Über Geld spricht man nicht – das ist ein überholtes Tabu.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
@@ -877,8 +885,9 @@ const STATEMENTS = [
 {id:'m13',text:'Man sollte offen über sein Gehalt sprechen.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
 {id:'m14',text:'Luxus wird überschätzt.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
 {id:'m15',text:'Geld ist ein Mittel zum Zweck, kein Ziel.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
+{id:'m16',text:'Mehr Menschen sollten sich ernsthaft mit der Finanzwelt auseinandersetzen.',cat:'Geld & Lebensstandard',main:'Geld & Lebensstandard'},
 
-// ══ FAMILIE & ERZIEHUNG (15) ══
+// ══ FAMILIE & ERZIEHUNG (16) ══
 
 {id:'fa01',text:'Familie ist, wen man wählt – nicht, mit wem man geboren wird.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
 {id:'fa02',text:'Eltern schulden ihren Kindern mehr, als Kinder ihren Eltern schulden.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
@@ -895,8 +904,9 @@ const STATEMENTS = [
 {id:'fa13',text:'Man kann eine glückliche Kindheit gehabt haben und trotzdem schlechte Eltern gehabt haben.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
 {id:'fa14',text:'Familientraditionen sind wichtiger als viele Menschen zugeben.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
 {id:'fa15',text:'Geschwister prägen uns stärker als Freunde.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
+{id:'fa16',text:'Man kann seine Eltern lieben und trotzdem den Kontakt abbrechen.',cat:'Familie & Erziehung',main:'Familie & Erziehung'},
 
-// ══ KÖRPER & GESUNDHEIT (15) ══
+// ══ KÖRPER & GESUNDHEIT (16) ══
 
 {id:'k01',text:'Was jemand isst, sagt etwas über ihn aus.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
 {id:'k02',text:'Drogen – einschließlich Alkohol – sollten Privatsache sein, solange niemand anderes zu Schaden kommt.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
@@ -913,8 +923,9 @@ const STATEMENTS = [
 {id:'k13',text:'Wer über seinen Körper redet, redet oft über etwas anderes.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
 {id:'k14',text:'Sport ist kein Ausgleich für einen ungesunden Alltag.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
 {id:'k15',text:'Die meisten Menschen wissen, was gut für sie wäre – und tun es trotzdem nicht.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
+{id:'k16',text:'Stress ist heute ein Statussymbol.',cat:'Körper & Gesundheit',main:'Körper & Gesundheit'},
 
-// ══ GESELLSCHAFT & ZUSAMMENLEBEN (15) ══
+// ══ GESELLSCHAFT & ZUSAMMENLEBEN (16) ══
 
 {id:'ge01',text:'Wir schulden Fremden mehr, als die meisten zugeben würden.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
 {id:'ge02',text:'Es gibt heute noch Menschen zweiter Klasse – auch in reichen Ländern.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
@@ -931,8 +942,9 @@ const STATEMENTS = [
 {id:'ge13',text:'Gerechtigkeit ist oft eine Frage der Perspektive.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
 {id:'ge14',text:'Nicht jede Meinung verdient Respekt.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
 {id:'ge15',text:'Die meisten Menschen halten sich für offener als sie tatsächlich sind.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
+{id:'ge16',text:'Wer schweigt, macht sich manchmal mitschuldig.',cat:'Gesellschaft & Zusammenleben',main:'Gesellschaft & Zusammenleben'},
 
-// ══ HUMOR & LEICHTIGKEIT (15) ══
+// ══ HUMOR & LEICHTIGKEIT (16) ══
 
 {id:'h01',text:'Über alles darf man Witze machen – die Frage ist wie.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
 {id:'h02',text:'Wer sich selbst nicht ernst nehmen kann, ist weiser als die meisten.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
@@ -949,8 +961,9 @@ const STATEMENTS = [
 {id:'h13',text:'Die meisten Witze funktionieren nur, weil etwas Unausgesprochenes mitschwingt.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
 {id:'h14',text:'Humor verbindet mehr als gemeinsame Werte.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
 {id:'h15',text:'Wer über sich selbst lachen kann, verliert weniger im Leben.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
+{id:'h16',text:'Galgenhumor ist eine Form von Stärke.',cat:'Humor & Leichtigkeit',main:'Humor & Leichtigkeit'},
 
-// ══ SEXUALITÄT & KÖRPERBILD (15) ══
+// ══ SEXUALITÄT & KÖRPERBILD (16) ══
 
 {id:'sx01',text:'Schönheitsideale werden mehr von Medien geprägt als von echten Menschen.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
 {id:'sx02',text:'Körperliche Attraktivität ist ein unfairer Vorteil im Leben.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
@@ -967,8 +980,9 @@ const STATEMENTS = [
 {id:'sx13',text:'Die meisten Menschen haben ein gestörteres Verhältnis zu ihrem Körper als sie zugeben.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
 {id:'sx14',text:'Attraktivität ist zu einem gewissen Grad erlernbar.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
 {id:'sx15',text:'Der eigene Körper ist politisch – ob man will oder nicht.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
+{id:'sx16',text:'Fremdgehen ist manchmal eine verständliche Reaktion auf eine kaputte Beziehung.',cat:'Sexualität & Körperbild',main:'Sexualität & Körperbild'},
 
-// ══ ARBEIT & BERUF (15) ══
+// ══ ARBEIT & BERUF (16) ══
 
 {id:'ab01',text:'Die 4-Tage-Woche ist ein überfälliger Fortschritt.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
 {id:'ab02',text:'Ein sinnloser Job ist schlimmer als Arbeitslosigkeit.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
@@ -985,8 +999,9 @@ const STATEMENTS = [
 {id:'ab13',text:'Selbstständigkeit ist mutiger als Angestelltsein.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
 {id:'ab14',text:'Wer nach der Arbeit nicht abschalten kann, hat ein Problem mit sich, nicht mit dem Job.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
 {id:'ab15',text:'Arbeit macht einen Menschen erst dann glücklich, wenn sie sinnvoll ist.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
+{id:'ab16',text:'Man darf seinen Chef anlügen.',cat:'Arbeit & Beruf',main:'Arbeit & Beruf'},
 
-// ══ TOD & VERGÄNGLICHKEIT (15) ══
+// ══ TOD & VERGÄNGLICHKEIT (16) ══
 
 {id:'td01',text:'Der Gedanke an den eigenen Tod macht das Leben reicher, nicht ärmer.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
 {id:'td02',text:'Menschen verdrängen den Tod, obwohl er das Einzige ist, das sicher ist.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
@@ -1003,6 +1018,7 @@ const STATEMENTS = [
 {id:'td13',text:'Wer nicht über den Tod reden kann, kann auch nicht wirklich über das Leben reden.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
 {id:'td14',text:'Der Tod gibt allem eine Bedeutung – auch dem Alltäglichen.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
 {id:'td15',text:'Man sollte zu Lebzeiten klären, wie man beerdigt werden möchte.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
+{id:'td16',text:'Ich habe Frieden mit meiner Sterblichkeit geschlossen.',cat:'Tod & Vergänglichkeit',main:'Tod & Vergänglichkeit'},
 
 ];
 
