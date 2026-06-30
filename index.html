@@ -232,8 +232,8 @@
   </div>
   <div style="display:flex;flex-direction:column;gap:10px">
     <button class="btn btn-primary" onclick="goToProfile()">Neues Gottcha erstellen</button>
-    <button class="btn btn-secondary" onclick="document.getElementById('load-file').click()">Gottcha laden (.json)</button>
-    <input type="file" id="load-file" accept=".json" onchange="loadProfile(event)">
+    <button class="btn btn-secondary" onclick="document.getElementById('load-file').click()">Gottcha laden</button>
+    <input type="file" id="load-file" accept=".gottcha,.json" onchange="loadProfile(event)">
     <button class="btn btn-ghost" onclick="showScreen('screen-tutorial')" style="font-size:.85rem">Noch kein Gottcha? Lern, wie es geht →</button>
   </div>
   <div id="resume-banner" class="card" style="display:none">
@@ -2243,11 +2243,18 @@ function exportEnthaltungen(){
 }
 
 function exportProfile(){
-  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null},null,2);
-  const blob=new Blob([data],{type:'application/json'});
-  const url=URL.createObjectURL(blob); const a=document.createElement('a');
-  a.href=url; a.download='gottcha_'+(state.profile?.nickname||'profil')+'.json'; a.click();
-  URL.revokeObjectURL(url); toast('Gespeichert ✓');
+  const colors={a:selectedA,b:selectedB};
+  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null,colors},null,2);
+  const filename=(state.profile?.nickname||'profil')+'.gottcha';
+  if(navigator.msSaveBlob){
+    navigator.msSaveBlob(new Blob([data],{type:'application/octet-stream'}),filename);
+  } else {
+    const uri='data:application/octet-stream;charset=utf-8,'+encodeURIComponent(data);
+    const a=document.createElement('a');
+    a.href=uri; a.download=filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+  toast('Gespeichert ✓');
 }
 function migrateAnswers(oldAnswers){
   const allIds=new Set(STATEMENTS.map(s=>s.id));
@@ -2281,6 +2288,7 @@ function loadProfile(e){
         } else {
           state.answers=data.answers;
         }
+        if(data.colors?.a && data.colors?.b) applyColors(data.colors.a, data.colors.b);
         state.currentIndex=Object.keys(state.answers).length;
         state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
         saveToStorage();
@@ -2343,9 +2351,9 @@ function beendenQuit(){
 }
 function beendenSaveAndQuit(){
   const data=JSON.stringify({v:1,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null},null,2);
-  const blob=new Blob([data],{type:'application/json'});
+  const blob=new Blob([data],{type:'application/octet-stream'});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download='gottcha_'+(state.profile?.nickname||'profil')+'.json';a.click();
+  const a=document.createElement('a');a.href=url;a.download=(state.profile?.nickname||'profil')+'.gottcha';document.body.appendChild(a);a.click();document.body.removeChild(a);
   URL.revokeObjectURL(url);
   setTimeout(()=>{
     clearSession();
