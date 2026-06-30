@@ -137,6 +137,23 @@
   .compat-score{text-align:center;padding:20px;background:var(--surface);border-radius:var(--radius);}
   .compat-num{font-family:var(--mono);font-size:3rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
   .compat-label{color:var(--muted);font-size:.85rem;margin-top:4px;}
+  .compat-emoji{font-size:2.2rem;margin-top:6px;}
+  .filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .filter-btn{padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.8rem;cursor:pointer;transition:all .15s;}
+  .filter-btn.active{border-color:var(--accent);color:var(--accent);}
+  .canvas-export-btn{display:block;margin:6px auto 0;padding:4px 12px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.7rem;cursor:pointer;transition:all .15s;}
+  .canvas-export-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+  .compat-report{display:flex;gap:12px;}
+  .compat-report-col{flex:1;display:flex;flex-direction:column;gap:6px;}
+  .compat-report-item{font-size:.78rem;padding:6px 10px;border-radius:8px;border:1px solid var(--border);}
+  .compat-report-item.good{border-color:var(--accent)44;color:var(--accent);}
+  .compat-report-item.bad{border-color:var(--danger)44;color:var(--danger);}
+  /* LIGHT MODE */
+  body.light{--bg:#f0f0f5;--surface:#ffffff;--border:#dddde8;--text:#1a1a2e;--muted:#7070888;}
+  body.light input[type=text],body.light input[type=number],body.light textarea,body.light select{background:#f8f8fc;}
+  body.light .ring-svg path[fill="var(--surface)"]{fill:#ffffff;}
+  .qr-wrap{display:none;flex-direction:column;align-items:center;gap:10px;}
+  .qr-wrap img{border-radius:12px;border:1px solid var(--border);}
   .countdown-bar{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
   .countdown-time{color:var(--warn);}
 
@@ -284,7 +301,7 @@
 
 <!-- ═══ STECKBRIEF ═══ -->
 <div id="screen-profile" class="screen">
-  <div class="logo-wrap logo-sm"><span class="l1">S</span><span class="l1">t</span><span class="l1">e</span><span class="l1">c</span><span class="l1">k</span><span class="l1">b</span><span class="l1">r</span><span class="l1">i</span><span class="l1">e</span><span class="l1">f</span></div>
+  <div class="logo-wrap logo-sm"><span class="l1">Ü</span><span class="l1">b</span><span class="l1">e</span><span class="l1">r</span><span style="display:inline-block;width:.4em"></span><span class="l2">m</span><span class="l2">i</span><span class="l2">c</span><span class="l2">h</span></div>
   <div class="card">
     <p class="label">Privatsphäre</p>
     <div class="privacy-tabs">
@@ -323,6 +340,22 @@
   <div class="card" id="profile-level3" style="display:none">
     <p class="label">Freie Angaben</p>
     <div class="field"><textarea id="p-free" placeholder="Links, Kontakt, was auch immer..." maxlength="600" style="min-height:120px"></textarea></div>
+  </div>
+  <div class="card">
+    <p class="label">Deine Farben</p>
+    <div class="logo-wrap" style="font-size:1.8rem;letter-spacing:-1px;margin:4px 0 16px">
+      <span class="l1">G</span><span class="logo-net"><svg width="20" height="20" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="none" stroke="var(--accent2)" stroke-width="1"/><polygon points="14,3 20.7,10.2 22.6,19 14,22.3 5.9,18.7 7.8,10.4" fill="var(--accent2)" fill-opacity="0.25" stroke="var(--accent2)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14" cy="3" r="1.5" fill="var(--accent2)"/><circle cx="20.7" cy="10.2" r="1.5" fill="var(--accent2)"/><circle cx="22.6" cy="19" r="1.5" fill="var(--accent2)"/><circle cx="14" cy="22.3" r="1.5" fill="var(--accent2)"/><circle cx="5.9" cy="18.7" r="1.5" fill="var(--accent2)"/><circle cx="7.8" cy="10.4" r="1.5" fill="var(--accent2)"/></svg></span><span class="l1">t</span><span class="l1">t</span><span class="l2">c</span><span class="l2">h</span><span class="l2">a</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 1 (du)</p>
+        <div class="palette-row" id="palette-row-setup-a"></div>
+      </div>
+      <div>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 2 (andere)</p>
+        <div class="palette-row" id="palette-row-setup-b"></div>
+      </div>
+    </div>
   </div>
   <div class="warning" id="privacy-warning">⚠️ Dein Steckbrief enthält persönliche Angaben. Der Teilen-Link ist für jeden lesbar, dem du ihn schickst.</div>
   <div class="warning" id="privacy-warning-3">⚠️ Du teilst detaillierte persönliche Infos. Bitte teile keine Informationen, die du nicht öffentlich machen würdest.</div>
@@ -432,31 +465,18 @@
 <div class="card">
     <p class="label">Meine Bubble</p>
     <div class="net-wrap" style="padding:10px 0"><canvas id="my-radar" width="300" height="300"></canvas></div>
+    <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('my-radar'),'meine-bubble')">↓ Als Bild speichern</button>
     <div id="my-stmt-popup" class="stmt-popup"></div>
     <div class="cat-accordion" id="my-cat-accordion" style="margin-top:12px"></div>
   </div>
-  <button id="btn-resume-pflicht" class="btn btn-primary" onclick="resumePflicht()" style="display:none">Einführung fortsetzen →</button>
   <div class="action-grid">
     <button class="btn btn-primary" onclick="continueStatements()">Statements fortsetzen</button>
     <button class="btn btn-secondary" onclick="showScreen('screen-review')">Antworten bearbeiten</button>
     <button class="btn btn-secondary" onclick="showScreen('screen-share')">Link teilen</button>
     <button class="btn btn-ghost" onclick="exportProfile()">Als Datei speichern</button>
   </div>
-  <button class="btn btn-ghost" onclick="showScreen('screen-edit-profile')">Steckbrief bearbeiten</button>
-  <button class="btn btn-ghost" onclick="showScreen('screen-cat-privacy')">Bubble-Freigaben verwalten</button>
-  <div class="card">
-    <p class="label">Bubble-Farben</p>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 1 (du)</p>
-        <div class="palette-row" id="palette-row-a"></div>
-      </div>
-      <div>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 2 (andere)</p>
-        <div class="palette-row" id="palette-row-b"></div>
-      </div>
-    </div>
-  </div>
+  <button class="btn btn-ghost" onclick="showScreen('screen-edit-profile')">Profil bearbeiten</button>
+  <button class="btn btn-ghost" onclick="exportEnthaltungen()">↓ Enthaltungen exportieren</button>
   <div class="divider"></div>
   <button class="btn btn-ghost" onclick="showScreen('screen-start')">← Startseite</button>
   <button class="btn btn-ghost" style="font-size:.8rem;color:var(--danger);border-color:var(--danger)40" onclick="showBeendenModal()">Gottcha beenden</button>
@@ -465,7 +485,7 @@
 <!-- ═══ STECKBRIEF BEARBEITEN ═══ -->
 <div id="screen-edit-profile" class="screen">
   <div style="display:flex;align-items:center;justify-content:space-between">
-    <span style="font-size:1.1rem;font-weight:700">Steckbrief bearbeiten</span>
+    <span style="font-size:1.1rem;font-weight:700">Profil bearbeiten</span>
     <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-my-profile')">← Zurück</button>
   </div>
   <div class="card">
@@ -504,6 +524,24 @@
   </div>
   <div class="warning" id="edit-warn-2">⚠️ Dein Steckbrief enthält persönliche Angaben.</div>
   <div class="warning" id="edit-warn-3">⚠️ Du teilst detaillierte persönliche Infos.</div>
+  <div class="card">
+    <p class="label">Bubble-Farben</p>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 1 (du)</p>
+        <div class="palette-row" id="palette-row-a"></div>
+      </div>
+      <div>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 2 (andere)</p>
+        <div class="palette-row" id="palette-row-b"></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-ghost" onclick="showScreen('screen-cat-privacy')">Bubble-Freigaben verwalten</button>
+  <div class="card">
+    <p class="label">Darstellung</p>
+    <button class="btn btn-secondary" id="theme-toggle-btn" onclick="toggleTheme()">🌙 Dunkles Design</button>
+  </div>
   <button class="btn btn-primary" onclick="saveEditProfile()">Änderungen speichern</button>
 </div>
 
@@ -543,10 +581,24 @@
 <div id="screen-compare" class="screen">
   <div class="logo-wrap logo-sm" style="justify-content:flex-start"><span class="l1">V</span><span class="l1">e</span><span class="l1">r</span><span class="l1">g</span><span class="l1">l</span><span class="l1">e</span><span class="l1">i</span><span class="l1">c</span><span class="l1">h</span></div>
   <div class="compare-header" id="compare-header"></div>
-  <div class="compat-score"><div class="compat-num" id="compat-num">–%</div><div class="compat-label">Übereinstimmung</div></div>
+  <div class="compat-score"><div class="compat-num" id="compat-num">–%</div><div class="compat-emoji" id="compat-emoji"></div><div class="compat-label">Übereinstimmung</div></div>
+  <div class="card" id="compat-report" style="display:none">
+    <p class="label">Kompatibilitätsbericht</p>
+    <div class="compat-report">
+      <div class="compat-report-col">
+        <p style="font-size:.72rem;color:var(--muted);margin-bottom:4px">Größte Übereinstimmung</p>
+        <div id="compat-best"></div>
+      </div>
+      <div class="compat-report-col">
+        <p style="font-size:.72rem;color:var(--muted);margin-bottom:4px">Größte Unterschiede</p>
+        <div id="compat-worst"></div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <p class="label">Gesamte Bubble</p>
     <div style="display:flex;justify-content:center;padding:10px 0"><canvas id="compare-radar" width="300" height="300"></canvas></div>
+    <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('compare-radar'),'vergleich-bubble')">↓ Als Bild speichern</button>
     <div class="legend-row">
       <div style="display:flex;align-items:center;gap:6px;font-size:.8rem"><div class="legend-dot" style="background:var(--accent)"></div><span id="legend-me">Ich</span></div>
       <div style="display:flex;align-items:center;gap:6px;font-size:.8rem"><div class="legend-dot" style="background:var(--accent2)"></div><span id="legend-other">Andere</span></div>
@@ -569,8 +621,13 @@
     <span style="font-size:1.1rem;font-weight:700">Antworten bearbeiten</span>
     <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-my-profile')">← Zurück</button>
   </div>
-  <p style="font-size:.85rem;color:var(--muted)">Tippe auf eine Antwort um sie zu ändern.</p>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="setReviewFilter('all',this)">Alle</button>
+    <button class="filter-btn" onclick="setReviewFilter('open',this)">Offen</button>
+    <button class="filter-btn" onclick="setReviewFilter('done',this)">Beantwortet</button>
+  </div>
   <div id="review-list"></div>
+  <button class="btn btn-ghost" onclick="exportEnthaltungen()" style="margin-top:8px">↓ Enthaltungen exportieren</button>
 </div>
 
 <!-- BEENDEN MODAL -->
@@ -1093,6 +1150,8 @@ function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  if(id==='screen-profile')      renderPaletteRow();
+  if(id==='screen-edit-profile') renderPaletteRow();
   if(id==='screen-my-profile')   { renderMyProfile(); renderPaletteRow(); }
   if(id==='screen-review')       renderReview();
   if(id==='screen-compare')      renderCompare();
@@ -1242,7 +1301,7 @@ function saveProfileAndContinue(){
 }
 
 // ── PFLICHT FLOW ──
-let pflIdx=0, pflScale=null;
+let pflIdx=0, pflScale=null, _pflTimer=null;
 
 function startPflicht(){
   pflIdx=0; pflScale=null;
@@ -1267,10 +1326,14 @@ function renderPflicht(){
 function pflSelectScale(val){
   pflScale=val;
   document.querySelectorAll('#screen-pflicht .scale-btn').forEach(b=>b.classList.toggle('selected',parseInt(b.dataset.val)===val));
-  if(pflIdx < PFLICHT_STATEMENTS.length-1) setTimeout(pflNext,320);
+  if(pflIdx < PFLICHT_STATEMENTS.length-1){
+    clearTimeout(_pflTimer);
+    _pflTimer=setTimeout(pflNext,320);
+  }
 }
 
 function pflNext(){
+  clearTimeout(_pflTimer); _pflTimer=null;
   const stmt=PFLICHT_STATEMENTS[pflIdx];
   const isLast=pflIdx>=PFLICHT_STATEMENTS.length-1;
   if(isLast && pflScale===null){ toast('Bitte beantworte die Frage zuerst.'); return; }
@@ -1281,6 +1344,7 @@ function pflNext(){
 }
 
 function pflPrev(){
+  clearTimeout(_pflTimer); _pflTimer=null;
   if(pflIdx===0) return;
   pflIdx--; pflScale=null; renderPflicht();
 }
@@ -1345,7 +1409,11 @@ function startStatements(){
   showScreen('screen-statements');
   renderStatement();
 }
-function continueStatements(){ showScreen('screen-statements'); renderStatement(); }
+function continueStatements(){
+  const pflichtDone=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
+  if(!pflichtDone){ showScreen('screen-pflicht'); renderPflicht(); }
+  else { showScreen('screen-statements'); renderStatement(); }
+}
 
 function renderSortBar(){
   const bar=document.getElementById('sort-bar'); bar.innerHTML='';
@@ -1412,12 +1480,15 @@ function renderStatement(){
   renderCatProgress();
 }
 
+let _stmtTimer=null;
 function selectScale(val){
   state.selectedScale=val;
   document.querySelectorAll('.scale-btn').forEach(btn=>btn.classList.toggle('selected',parseInt(btn.dataset.val)===val));
-  setTimeout(nextStatement,320);
+  clearTimeout(_stmtTimer);
+  _stmtTimer=setTimeout(nextStatement,120);
 }
 function nextStatement(){
+  clearTimeout(_stmtTimer); _stmtTimer=null;
   const stmt=currentStmt();
   if(state.selectedScale!==null) state.answers[stmt.id]=state.selectedScale;
   saveToStorage();
@@ -1425,6 +1496,7 @@ function nextStatement(){
   state.currentIndex++; state.selectedScale=null; renderStatement();
 }
 function prevStatement(){
+  clearTimeout(_stmtTimer); _stmtTimer=null;
   if(state.currentIndex===0) return;
   state.currentIndex--; state.selectedScale=null; renderStatement();
 }
@@ -1432,13 +1504,6 @@ function prevStatement(){
 // ══════════════════════════════════════
 // MY PROFILE
 // ══════════════════════════════════════
-function resumePflicht(){
-  const done=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
-  if(done){ toast('Einführung bereits abgeschlossen ✓'); return; }
-  pflIdx=PFLICHT_STATEMENTS.findIndex(s=>state.answers[s.id]===undefined);
-  if(pflIdx<0) pflIdx=0;
-  showScreen('screen-pflicht');
-}
 
 function renderMyProfile(){
   const p=state.profile; if(!p) return;
@@ -1542,6 +1607,7 @@ function renderMyCatAccordion(){
       </div>
       <div class="cat-acc-body">
         <canvas id="${cid}" width="320" height="320" style="display:block;margin:0 auto;cursor:default"></canvas>
+        <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('${cid}'),'bubble-${cat.replace(/\\W/g,'-')}')">↓ Als Bild speichern</button>
         <div id="${pid}" class="stmt-popup"></div>
         <p style="font-size:.72rem;color:var(--muted);margin-top:6px;text-align:center">Tippe eine Achse: Statement anzeigen · Zweite Achse: Tauschen</p>
       </div>`;
@@ -1675,7 +1741,20 @@ function showCatPopup(popupEl,stmts,datasets,ai,swapping,onSwapToggle){
   if(!popupEl)return;
   const s=stmts[ai];
   let html='<strong style="color:var(--accent2)">'+s.text+'</strong>';
-  const scoreStr=datasets.map(ds=>(ds.label||'?')+': '+(ds.values[ai]>0?Math.round(ds.values[ai]*5):'–')).join(' · ');
+  const signalSvg=(filled)=>{
+    const c=getAccent2(), dim='#ffffff22';
+    const bars=Array.from({length:5},(_,i)=>{
+      const h=4+i*2, x=i*4, y=12-h;
+      return `<rect x="${x}" y="${y}" width="3" height="${h}" rx="1" fill="${i<filled?c:dim}"/>`;
+    }).join('');
+    return `<svg width="22" height="14" viewBox="0 0 20 13" style="vertical-align:middle;margin-left:6px">${bars}</svg>`;
+  };
+  const scoreStr=datasets.map(ds=>{
+    const v=ds.values[ai]>0?Math.round(ds.values[ai]*50)/10:0;
+    const filled=v>0?Math.round(v):0;
+    const lbl=(ds.label||'?')+': '+(v||'–');
+    return lbl+(v>0?signalSvg(filled):'');
+  }).join('<br>');
   html+='<div class="stmt-popup-score">'+scoreStr+'</div>';
   if(swapping) html+='<div style="margin-top:4px;font-size:.78rem;color:var(--warn)">↕ Gewählt – zweites Segment antippen zum Tauschen</div>';
   popupEl.innerHTML=html;
@@ -1789,22 +1868,44 @@ function applyColors(a,b){
 }
 function renderPaletteRow(){
   ['a','b'].forEach(which=>{
-    const row=document.getElementById('palette-row-'+which); if(!row) return;
-    row.innerHTML='';
-    COLOR_OPTIONS.forEach(c=>{
-      const sw=document.createElement('div');
-      const active=(which==='a'?selectedA:selectedB)===c;
-      sw.className='palette-swatch'+(active?' active':'');
-      sw.title=c; sw.style.background=c;
-      sw.onclick=()=>{
-        const other=which==='a'?selectedB:selectedA;
-        if(c===other){toast('Beide Farben müssen unterschiedlich sein.');return;}
-        applyColors(which==='a'?c:selectedA, which==='b'?c:selectedB);
-      };
-      row.appendChild(sw);
+    ['palette-row-','palette-row-setup-'].forEach(prefix=>{
+      const row=document.getElementById(prefix+which); if(!row) return;
+      row.innerHTML='';
+      COLOR_OPTIONS.forEach(c=>{
+        const sw=document.createElement('div');
+        const active=(which==='a'?selectedA:selectedB)===c;
+        sw.className='palette-swatch'+(active?' active':'');
+        sw.title=c; sw.style.background=c;
+        sw.onclick=()=>{
+          const other=which==='a'?selectedB:selectedA;
+          if(c===other){toast('Beide Farben müssen unterschiedlich sein.');return;}
+          applyColors(which==='a'?c:selectedA, which==='b'?c:selectedB);
+        };
+        row.appendChild(sw);
+      });
     });
   });
 }
+function downloadCanvas(canvas, name){
+  const tmp=document.createElement('canvas');
+  tmp.width=canvas.width; tmp.height=canvas.height;
+  const ctx=tmp.getContext('2d');
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#0d0d0f';
+  ctx.fillRect(0,0,tmp.width,tmp.height);
+  ctx.drawImage(canvas,0,0);
+  const a=document.createElement('a');
+  a.download=(name||'bubble')+'.png';
+  a.href=tmp.toDataURL('image/png');
+  a.click();
+}
+
+function toggleTheme(){
+  const light=document.body.classList.toggle('light');
+  localStorage.setItem('gottcha_theme',light?'light':'dark');
+  const btn=document.getElementById('theme-toggle-btn');
+  if(btn) btn.textContent=light?'☀️ Helles Design':'🌙 Dunkles Design';
+}
+
 function loadPalette(){
   const saved=localStorage.getItem('gottcha_colors');
   if(saved){try{const{a,b}=JSON.parse(saved);applyColors(a,b);}catch(e){}}
@@ -1841,6 +1942,8 @@ function renderCompare(){
   let totalDiff=0; shared.forEach(s=>totalDiff+=Math.abs((myAns[s.id]||0)-(otherAns[s.id]||0)));
   const score=shared.length>0?Math.round((1-totalDiff/(shared.length*4))*100):0;
   document.getElementById('compat-num').textContent=score+'%';
+  const emoji=score>=90?'❤️':score>=80?'🥰':score>=70?'😄':score>=60?'😊':score>=50?'🙂':score>=40?'😐':score>=30?'😟':score>=20?'😰':score>=10?'😱':'💀';
+  document.getElementById('compat-emoji').textContent=emoji;
 
   const myAvgs=getCategoryAverages(myAns), otherAvgs=getCategoryAverages(otherAns);
   const labels=Object.keys(myAvgs);
@@ -1851,6 +1954,7 @@ function renderCompare(){
   ],'compare-radar');
 
   const acc=document.getElementById('cat-accordion'); acc.innerHTML='';
+  const _catScoreList=[];
   CATEGORIES.forEach(cat=>{
     // use own saved order for this category
     const base=REGULAR_STATEMENTS.filter(s=>s.main===cat);
@@ -1877,6 +1981,7 @@ function renderCompare(){
     const sharedCat=myStmts.filter(s=>myAns[s.id]>0&&otherAns[s.id]>0);
     let diff=0; sharedCat.forEach(s=>diff+=Math.abs((myAns[s.id]||0)-(otherAns[s.id]||0)));
     const catScore=sharedCat.length>0?Math.round((1-diff/(sharedCat.length*4))*100):null;
+    if(catScore!==null) _catScoreList.push({cat,score:catScore});
     const stmtLabels=myStmts.map(s=>s.text.slice(0,16)+'…');
     const cid2='cmpcat_'+cat.replace(/\W/g,'_');
     const pid2='cmppop_'+cat.replace(/\W/g,'_');
@@ -1888,6 +1993,7 @@ function renderCompare(){
       </div>
       <div class="cat-acc-body">
         <canvas id="${cid2}" width="320" height="320" style="display:block;margin:0 auto;cursor:default"></canvas>
+        <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('${cid2}'),'bubble-${cat.replace(/\\W/g,'-')}')">↓ Als Bild speichern</button>
         <div id="${pid2}" class="stmt-popup"></div>
         <p style="font-size:.72rem;color:var(--muted);margin-top:6px;text-align:center">Tippe ein Statement an, um es ganz anzuzeigen · oder zwei Statements hintereinander, um deren Positionen zu tauschen</p>
         <div class="legend-row">
@@ -1914,6 +2020,16 @@ function renderCompare(){
       redraw2();
     },50);
   });
+
+  // compat report
+  if(_catScoreList.length>=2){
+    _catScoreList.sort((a,b)=>b.score-a.score);
+    const top=_catScoreList.slice(0,3), bot=[..._catScoreList].reverse().slice(0,3);
+    const bestEl=document.getElementById('compat-best'), worstEl=document.getElementById('compat-worst');
+    if(bestEl) bestEl.innerHTML=top.map(c=>`<div class="compat-report-item good">${c.cat} <b>${c.score}%</b></div>`).join('');
+    if(worstEl) worstEl.innerHTML=bot.map(c=>`<div class="compat-report-item bad">${c.cat} <b>${c.score}%</b></div>`).join('');
+    const rep=document.getElementById('compat-report'); if(rep) rep.style.display='block';
+  }
 
   updateCountdown();
   document.getElementById('btn-back-link').style.display=incomingProfile.returnFor?'none':'block';
@@ -1985,6 +2101,14 @@ function doShare(){
   shareUrl=window.location.href.split('?')[0]+'?g='+encoded;
   document.getElementById('share-link-text').textContent=shareUrl;
   document.getElementById('share-link-box').style.display='flex';
+  const qrWrap=document.getElementById('qr-wrap');
+  const qrImg=document.getElementById('qr-img');
+  if(qrWrap&&qrImg){
+    const bg=document.body.classList.contains('light')?'f0f0f5':'0d0d0f';
+    const fg=document.body.classList.contains('light')?'1a1a2e':'e8e8f0';
+    qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(shareUrl)}&bgcolor=${bg}&color=${fg}&format=png&qzone=2`;
+    qrWrap.style.display='flex';
+  }
   if(navigator.share){ navigator.share({title:'Mein Gottcha',url:shareUrl}); }
   else { navigator.clipboard.writeText(shareUrl).then(()=>toast('Link kopiert! 🎯')); }
 }
@@ -2005,6 +2129,26 @@ function sendBackLink(){
 // ══════════════════════════════════════
 // EXPORT / IMPORT
 // ══════════════════════════════════════
+function exportEnthaltungen(){
+  const allStmts=[...PFLICHT_STATEMENTS,...REGULAR_STATEMENTS];
+  const lines=['Gottcha – Enthaltungen','Erstellt: '+new Date().toLocaleDateString('de-DE'),''];
+  let found=false;
+  CATEGORIES.forEach(cat=>{
+    const stmts=allStmts.filter(s=>s.main===cat&&state.answers[s.id]===0);
+    if(!stmts.length) return;
+    found=true;
+    lines.push(cat);
+    stmts.forEach(s=>lines.push('  – '+s.text));
+    lines.push('');
+  });
+  if(!found){ toast('Keine Enthaltungen vorhanden.'); return; }
+  const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='gottcha-enthaltungen.txt';
+  a.click();
+}
+
 function exportProfile(){
   const data=JSON.stringify({v:1,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null},null,2);
   const blob=new Blob([data],{type:'application/json'});
@@ -2036,10 +2180,20 @@ function loadProfile(e){
 // ══════════════════════════════════════
 // REVIEW
 // ══════════════════════════════════════
+let _reviewFilter='all';
+function setReviewFilter(f,btn){
+  _reviewFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderReview();
+}
 function renderReview(){
   const list=document.getElementById('review-list'); list.innerHTML='';
   REGULAR_STATEMENTS.forEach((s,idx)=>{
-    const v=state.answers[s.id]; const div=document.createElement('div'); div.className='review-item';
+    const v=state.answers[s.id];
+    if(_reviewFilter==='open'&&v!==undefined) return;
+    if(_reviewFilter==='done'&&v===undefined) return;
+    const div=document.createElement('div'); div.className='review-item';
     div.innerHTML=`<div class="review-text">${s.text}<div class="review-cat">${s.cat}</div></div>
       <div class="review-score ${v===0?'skip':''}" onclick="editAnswer(${idx})">${v===undefined?'–':v===0?'Enth.':v}</div>`;
     list.appendChild(div);
@@ -2088,6 +2242,9 @@ function toast(msg){
 // INIT
 // ══════════════════════════════════════
 document.addEventListener('DOMContentLoaded',()=>{
+  if(localStorage.getItem('gottcha_theme')==='light') document.body.classList.add('light');
+  const themeBtn=document.getElementById('theme-toggle-btn');
+  if(themeBtn) themeBtn.textContent=document.body.classList.contains('light')?'☀️ Helles Design':'🌙 Dunkles Design';
   loadPalette();
   checkIncomingLink();
   initStart();
