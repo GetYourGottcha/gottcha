@@ -129,6 +129,13 @@
   .toggle-chip{padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:var(--bg);font-size:.72rem;color:var(--muted);cursor:pointer;transition:all .15s;font-family:var(--mono);}
   .toggle-chip.active-full{border-color:var(--accent);background:var(--accent-b);color:var(--text);}
   .toggle-chip.active-avg{border-color:var(--accent2);background:var(--accent2-b);color:var(--text);}
+  .toggle-pill{padding:5px 14px;border-radius:100px;border:1px solid var(--border);background:var(--bg);font-size:.82rem;color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--mono);}
+  .toggle-pill.on{border-color:var(--accent);background:var(--accent-b);color:var(--accent);font-weight:600;}
+  .conn-select-bar{display:none;position:sticky;bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;gap:10px;align-items:center;justify-content:space-between;box-shadow:0 4px 20px #0004;z-index:10;}
+  .conn-select-bar.visible{display:flex;}
+  .conn-card-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;}
+  .conn-card-check.checked{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .conn-card-check.disabled{opacity:.35;cursor:not-allowed;}
 
   /* EXPIRY */
   .expiry-row{display:flex;flex-wrap:wrap;gap:6px;}
@@ -224,84 +231,96 @@
   .palette-swatch:hover{transform:scale(1.12);}
   .palette-swatch.active{border-color:var(--text);transform:scale(1.12);}
   .palette-swatch::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--p2);}
+
+  /* START BIG BUTTONS */
+  .start-big-btn{display:flex;flex-direction:column;gap:3px;padding:18px 22px;border-radius:16px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:border-color .2s,transform .1s;width:100%;text-align:left;font-family:var(--sans);}
+  .start-big-btn:hover{border-color:var(--accent);}
+  .start-big-btn:active{transform:scale(.98);}
+  .start-big-btn-title{font-size:1.05rem;font-weight:700;color:var(--text);}
+  .start-big-btn-sub{font-size:.78rem;color:var(--muted);margin-top:2px;}
+  .start-big-btn.hero{border-color:var(--accent)66;background:var(--accent)09;}
+  .start-big-btn.hero .start-big-btn-title{color:var(--accent);}
+
+  /* CHARLIE */
+  .charlie-bubble{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:14px 20px;font-size:.98rem;line-height:1.5;text-align:center;position:relative;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s;min-height:52px;}
+  .charlie-bubble.show{opacity:1;transform:translateY(0);}
+  .charlie-bubble::after{content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:12px solid var(--border);}
+  .charlie-bubble::before{content:'';position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:11px solid var(--surface);z-index:1;}
+  .charlie-nameplate{font-family:var(--mono);font-size:.75rem;font-weight:700;letter-spacing:1px;padding:4px 14px;border:2px solid var(--text);border-radius:100px;margin-top:6px;text-align:center;opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s;}
+  .charlie-nameplate.show{opacity:1;transform:scale(1);}
+
+  /* PRIV MINI TABS */
+  .priv-mini-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .priv-mini-tab{padding:12px 6px;border:2px solid var(--border);border-radius:10px;text-align:center;cursor:pointer;font-size:.92rem;font-weight:600;color:var(--muted);background:var(--bg);transition:all .2s;}
+  .priv-mini-tab.active{border-color:var(--accent);color:var(--text);background:var(--accent)15;}
+
+  /* CATEGORY TOGGLE PILLS */
+  .cat-toggle-pill{padding:6px 10px;border-radius:8px;border:2px solid var(--border);font-size:.75rem;cursor:pointer;transition:all .18s;background:var(--bg);color:var(--muted);user-select:none;line-height:1.3;text-align:left;}
+  .cat-toggle-pill.active{border-color:var(--accent);background:var(--accent)15;color:var(--text);}
+
+  /* CHARLIE DORMANT BUTTON */
+  #charlie-dormant-btn{position:fixed;bottom:20px;right:16px;z-index:200;width:50px;height:50px;border-radius:50%;background:var(--surface);border:2px solid var(--border);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 2px 16px #00000044;transition:transform .2s,border-color .2s;padding:4px;}
+  #charlie-dormant-btn:hover{transform:scale(1.1);border-color:var(--accent);}
+  #charlie-dormant-btn.visible{display:flex;}
+
+  /* CHARLIE DIALOG (post-load / dormant) */
+  .charlie-dialog-overlay{position:fixed;inset:0;z-index:400;display:none;align-items:flex-end;justify-content:center;background:#00000099;}
+  .charlie-dialog-overlay.visible{display:flex;}
+  .charlie-dialog-box{background:var(--surface);border:1px solid var(--border);border-radius:16px 16px 0 0;padding:28px 24px;width:100%;max-width:600px;display:flex;flex-direction:column;gap:14px;animation:fadeIn .25s ease;}
+
+  /* GUIDED TOUR */
+  #tour-wrap{position:fixed;inset:0;z-index:500;pointer-events:none;display:none;}
+  #tour-wrap.visible{display:block;}
+  .tour-hole{position:absolute;border-radius:12px;transition:all .4s ease;}
+  .tour-hole::before{content:'';position:fixed;inset:0;background:#000000bb;border-radius:0;pointer-events:none;}
+  .tour-highlight-ring{position:absolute;border-radius:14px;box-shadow:0 0 0 3px var(--accent),0 0 0 7px var(--accent)33;pointer-events:none;transition:all .4s ease;}
+  .tour-tip{position:absolute;background:var(--surface);border:2px solid var(--accent);border-radius:14px;padding:16px 18px;max-width:260px;box-shadow:0 4px 24px #00000055;pointer-events:all;z-index:2;}
+  .tour-tip-title{font-weight:700;color:var(--accent);font-size:.92rem;margin-bottom:6px;}
+  .tour-tip-body{font-size:.82rem;color:var(--muted);line-height:1.5;}
+  .tour-tip-btns{display:flex;gap:8px;margin-top:12px;}
 </style>
 </head>
 <body>
 
 <!-- ═══ START ═══ -->
 <div id="screen-start" class="screen active">
-  <div style="margin-top:40px"></div>
+  <div style="margin-top:32px"></div>
   <div class="logo-wrap"><span class="l1">G</span><span class="logo-net"><svg width="28" height="28" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="none" stroke="var(--accent2)" stroke-width="1"/><polygon points="14,3 20.7,10.2 22.6,19 14,22.3 5.9,18.7 7.8,10.4" fill="var(--accent2)" fill-opacity="0.25" stroke="var(--accent2)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14" cy="3" r="1.5" fill="var(--accent2)"/><circle cx="20.7" cy="10.2" r="1.5" fill="var(--accent2)"/><circle cx="22.6" cy="19" r="1.5" fill="var(--accent2)"/><circle cx="14" cy="22.3" r="1.5" fill="var(--accent2)"/><circle cx="5.9" cy="18.7" r="1.5" fill="var(--accent2)"/><circle cx="7.8" cy="10.4" r="1.5" fill="var(--accent2)"/></svg></span><span class="l1">t</span><span class="l1">t</span><span class="l2">c</span><span class="l2">h</span><span class="l2">a</span></div>
   <p class="tagline">Kenne Deine Bubble</p>
-  <div style="display:flex;justify-content:center;margin:8px 0"><svg id="start-radar" width="200" height="200" viewBox="0 0 200 200"></svg></div>
-  <div id="incoming-banner" class="incoming-banner" style="display:none">
-    <p class="label" style="margin-bottom:6px">Gottcha empfangen</p>
-    <p style="font-size:.9rem">Du hast ein Gottcha von <span class="iname" id="incoming-name">–</span> erhalten. Erstelle deins um den Vergleich zu sehen.</p>
-  </div>
   <div id="saved-profiles-section" style="display:none;flex-direction:column;gap:8px">
     <p class="label">Gespeicherte Gottchas</p>
     <div id="saved-profiles-items" style="display:flex;flex-direction:column;gap:8px"></div>
     <div style="height:4px"></div>
   </div>
   <div style="display:flex;flex-direction:column;gap:10px">
-    <button class="btn btn-primary" onclick="goToProfile()">Neues Gottcha erstellen</button>
-    <button class="btn btn-secondary" onclick="document.getElementById('load-file').click()">Aus Datei laden</button>
+    <button class="start-big-btn hero" onclick="charlieBegin()" style="flex-direction:row;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <span class="start-big-btn-title">New to Gottcha?</span>
+        <span class="start-big-btn-sub">Kurze Einführung</span>
+      </div>
+      <canvas id="start-charlie-canvas" width="54" height="54" style="flex-shrink:0"></canvas>
+    </button>
+    <button class="start-big-btn" onclick="goToProfile()">
+      <span class="start-big-btn-title">Create new Gottcha</span>
+      <span class="start-big-btn-sub">Steckbrief anlegen und loslegen</span>
+    </button>
+    <button class="start-big-btn" onclick="document.getElementById('load-file').click()">
+      <span class="start-big-btn-title">Upload Gottcha</span>
+      <span class="start-big-btn-sub">.gottcha Datei laden</span>
+    </button>
     <input type="file" id="load-file" accept=".gottcha,.json" onchange="loadProfile(event)">
-    <button class="btn btn-ghost" onclick="showScreen('screen-tutorial')" style="font-size:.85rem">Noch kein Gottcha? Lern, wie es geht →</button>
   </div>
 </div>
 
-<!-- ═══ TUTORIAL ═══ -->
-<div id="screen-tutorial" class="screen">
-  <div style="display:flex;align-items:center;justify-content:space-between">
-    <div class="logo-wrap logo-sm"><span class="l1">G</span><span class="l1">o</span><span class="l1">t</span><span class="l1">t</span><span class="logo-net"><svg width="18" height="18" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="none" stroke="var(--accent2)" stroke-width="1"/><polygon points="14,3 20.7,10.2 22.6,19 14,22.3 5.9,18.7 7.8,10.4" fill="var(--accent2)" fill-opacity="0.25" stroke="var(--accent2)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14" cy="3" r="1.5" fill="var(--accent2)"/><circle cx="20.7" cy="10.2" r="1.5" fill="var(--accent2)"/><circle cx="22.6" cy="19" r="1.5" fill="var(--accent2)"/><circle cx="14" cy="22.3" r="1.5" fill="var(--accent2)"/><circle cx="5.9" cy="18.7" r="1.5" fill="var(--accent2)"/><circle cx="7.8" cy="10.4" r="1.5" fill="var(--accent2)"/></svg></span><span class="l2">h</span><span class="l2">a</span></div>
-    <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-start')">← Zurück</button>
+<!-- ═══ CHARLIE TUTORIAL ═══ -->
+<div id="screen-charlie" class="screen">
+  <button class="btn btn-ghost btn-sm" id="charlie-back-btn" onclick="showScreen('screen-start')" style="align-self:flex-start">← Zurück</button>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <canvas id="charlie-canvas" width="200" height="200" style="display:block"></canvas>
   </div>
-  <div class="tut-dots" id="tut-dots"></div>
-  <div id="tut-pages">
-    <div class="tut-page active">
-      <div class="tut-title">Was ist Gottcha?</div>
-      <div class="tut-text">Gottcha hilft dir herauszufinden, deine Ansichten kompakt zu sehen - und die von anderen.</div>
-      <div class="card" style="text-align:left">
-        <p style="font-size:.85rem;line-height:1.6;color:var(--muted)">Du beantwortest Aussagen zu Themen wie Moral, Beziehungen, Politik oder Humor auf einer Skala von 1–5. Deine Antworten ergeben eine persönliche <strong style="color:var(--accent)">Bubble</strong> – deine Werten und Ansichten.</p>
-      </div>
-    </div>
-    <div class="tut-page">
-      <div class="tut-title">Schritt 1: Steckbrief</div>
-      <div class="tut-text">Wähle einen Nickname und entscheide, wie viel du über dich preisgeben möchtest.</div>
-      <div class="card" style="text-align:left;display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;gap:10px;align-items:center"><span style="font-size:1.4rem">🕶️</span><div><strong>Anonym</strong> – nur Nickname und Avatar</div></div>
-        <div style="display:flex;gap:10px;align-items:center"><span style="font-size:1.4rem">👤</span><div><strong>Persönlich</strong> – zusätzlich Alter, Stadt, Bio</div></div>
-        <div style="display:flex;gap:10px;align-items:center"><span style="font-size:1.4rem">🌐</span><div><strong>Offen</strong> – plus freier Text, Links, alles</div></div>
-      </div>
-    </div>
-    <div class="tut-page">
-      <div class="tut-title">Schritt 2: Statements beantworten</div>
-      <div class="tut-text">Du liest Aussagen – manchmal provokant, manchmal nachdenklich – und gibst deine Position an.</div>
-      <div class="card" style="text-align:left;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">Enthaltung (0)</strong> – kein Urteil, keine Meinung</div>
-        <div style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">1–2</strong> – stimme (eher) nicht zu</div>
-        <div style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">3</strong> – neutral / kommt drauf an</div>
-        <div style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">4–5</strong> – stimme (voll) zu</div>
-      </div>
-    </div>
-    <div class="tut-page">
-      <div class="tut-title">Schritt 3: Deine Bubble</div>
-      <div class="tut-text">Deine Antworten ergeben eine Bubble – ein mehrdimensionales Diagramm. Du kannst pro Kategorie wählen, ob du die volle Bubble oder nur den Durchschnitt teilst.</div>
-      <div style="display:flex;justify-content:center"><svg width="160" height="160" viewBox="0 0 160 160" id="tut-radar"></svg></div>
-    </div>
-    <div class="tut-page">
-      <div class="tut-title">Schritt 4: Vergleichen</div>
-      <div class="tut-text">Schick deinen Link an eine andere Person. Sie erstellt ihr Gottcha und schickt dir einen Rücklink. Dann seht ihr beide euren Vergleich.</div>
-      <div class="card" style="text-align:left;font-size:.85rem;color:var(--muted);line-height:1.6">
-        Jeder Link ist nur einmal verwendbar. Das Gottcha des anderen wird nach einer einstellbaren Zeit automatisch gelöscht.
-      </div>
-    </div>
-  </div>
-  <div style="display:flex;gap:10px">
-    <button class="btn btn-ghost" id="tut-back" onclick="tutNav(-1)">← Zurück</button>
-    <button class="btn btn-primary" id="tut-next" onclick="tutNav(1)">Weiter →</button>
-  </div>
+  <div class="charlie-bubble" id="charlie-bubble"></div>
+  <div id="charlie-content" style="width:100%;display:flex;flex-direction:column;gap:12px"></div>
+  <div id="charlie-btns" style="display:flex;flex-direction:column;gap:10px;width:100%"></div>
 </div>
 
 <!-- ═══ STECKBRIEF ═══ -->
@@ -348,9 +367,7 @@
   </div>
   <div class="card">
     <p class="label">Deine Farben</p>
-    <div class="logo-wrap" style="font-size:1.8rem;letter-spacing:-1px;margin:4px 0 16px">
-      <span class="l1">G</span><span class="logo-net"><svg width="20" height="20" viewBox="0 0 28 28"><circle cx="14" cy="14" r="12" fill="none" stroke="var(--accent2)" stroke-width="1"/><polygon points="14,3 20.7,10.2 22.6,19 14,22.3 5.9,18.7 7.8,10.4" fill="var(--accent2)" fill-opacity="0.25" stroke="var(--accent2)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14" cy="3" r="1.5" fill="var(--accent2)"/><circle cx="20.7" cy="10.2" r="1.5" fill="var(--accent2)"/><circle cx="22.6" cy="19" r="1.5" fill="var(--accent2)"/><circle cx="14" cy="22.3" r="1.5" fill="var(--accent2)"/><circle cx="5.9" cy="18.7" r="1.5" fill="var(--accent2)"/><circle cx="7.8" cy="10.4" r="1.5" fill="var(--accent2)"/></svg></span><span class="l1">t</span><span class="l1">t</span><span class="l2">c</span><span class="l2">h</span><span class="l2">a</span>
-    </div>
+    <canvas id="profile-color-canvas" width="90" height="90" style="display:block;margin:8px auto 16px"></canvas>
     <div style="display:flex;flex-direction:column;gap:14px">
       <div>
         <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 1 (du)</p>
@@ -402,7 +419,6 @@
     <button class="btn btn-ghost" onclick="pflPrev()" id="pfl-btn-prev">&larr; Zur&uuml;ck</button>
     <button class="btn btn-secondary" onclick="pflNext()" id="pfl-btn-next">Weiter &rarr;</button>
   </div>
-  <button class="btn btn-ghost" style="font-size:.8rem" onclick="showScreen('screen-tutorial')">? Tutorial</button>
 </div>
 
 <!-- ═══ STATEMENTS ═══ -->
@@ -433,6 +449,9 @@
     <div style="display:flex;justify-content:center">
       <button class="scale-btn skip" data-val="0" onclick="selectScale(0)" style="width:36%;aspect-ratio:unset;padding:7px 0;font-size:.7rem">Enthaltung</button>
     </div>
+    <div id="abstain-reason-wrap" style="display:none;margin-top:8px">
+      <textarea id="abstain-reason" placeholder="Warum Enthaltung? (optional)" rows="2" style="font-size:.8rem;resize:none;width:100%;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:8px;padding:8px;box-sizing:border-box"></textarea>
+    </div>
   </div>
 
   <div class="card">
@@ -448,8 +467,6 @@
     <button class="btn btn-ghost" onclick="prevStatement()" id="btn-prev">← Zurück</button>
     <button class="btn btn-secondary" onclick="nextStatement()" id="btn-next">Weiter →</button>
   </div>
-  <button class="btn btn-ghost" style="font-size:.8rem" onclick="showScreen('screen-my-profile')">Zum Profil (gespeichert)</button>
-  <button class="btn btn-ghost" style="font-size:.75rem;color:var(--danger);border-color:var(--danger)40" onclick="showBeendenModal()">Gottcha beenden</button>
 
   <div class="card">
     <p class="label">Fortschritt pro Kategorie</p>
@@ -481,21 +498,11 @@
     <div id="my-stmt-popup" class="stmt-popup"></div>
     <div class="cat-accordion" id="my-cat-accordion" style="margin-top:12px"></div>
   </div>
-  <div class="action-grid">
-    <button class="btn btn-primary" onclick="continueStatements()">Statements fortsetzen</button>
-    <button class="btn btn-secondary" onclick="showScreen('screen-review')">Antworten bearbeiten</button>
-    <button class="btn btn-secondary" onclick="showScreen('screen-share')">Link teilen</button>
-    <button class="btn btn-ghost" onclick="exportProfile()">Als Datei speichern</button>
-  </div>
-  <button class="btn btn-ghost" onclick="showScreen('screen-edit-profile')">Profil bearbeiten</button>
   <div class="card">
     <p class="label">Freies Feedback</p>
     <textarea id="feedback-text" placeholder="Was hat dir gefehlt? Was war unklar? Was würdest du anders machen?" style="min-height:100px;display:none"></textarea>
     <button class="btn btn-ghost" onclick="exportEnthaltungen()" style="margin-top:10px">↓ Feedback exportieren</button>
   </div>
-  <div class="divider"></div>
-  <button class="btn btn-ghost" onclick="showScreen('screen-start')">← Startseite</button>
-  <button class="btn btn-ghost" style="font-size:.8rem;color:var(--danger);border-color:var(--danger)40" onclick="showBeendenModal()">Gottcha beenden</button>
 </div>
 
 <!-- ═══ STECKBRIEF BEARBEITEN ═══ -->
@@ -555,6 +562,19 @@
   </div>
   <button class="btn btn-ghost" onclick="showScreen('screen-cat-privacy')">Bubble-Freigaben verwalten</button>
   <div class="card">
+    <p class="label">Gruppen</p>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:.88rem">Andere dürfen mich in Gruppen aufnehmen</span>
+      <button id="allow-groups-btn" class="toggle-pill" onclick="toggleAllowGroups()">Ja</button>
+    </div>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:6px">Wenn ausgeschaltet, können andere dein Gottcha nicht mit ihren Verbindungen zusammenführen.</p>
+  </div>
+  <div class="card">
+    <p class="label">Sichtbare Kategorien</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">Ausgeblendete Kategorien erscheinen nicht in den Statements und der Bubble.</p>
+    <div id="hidden-cats-grid" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+  <div class="card">
     <p class="label">Darstellung</p>
     <button class="btn btn-secondary" id="theme-toggle-btn" onclick="toggleTheme()">🌙 Dunkles Design</button>
   </div>
@@ -593,42 +613,48 @@
   </div>
 </div>
 
-<!-- ═══ VERGLEICH ═══ -->
-<div id="screen-compare" class="screen">
-  <div class="logo-wrap logo-sm" style="justify-content:flex-start"><span class="l1">V</span><span class="l1">e</span><span class="l1">r</span><span class="l1">g</span><span class="l1">l</span><span class="l1">e</span><span class="l1">i</span><span class="l1">c</span><span class="l1">h</span></div>
-  <div class="compare-header" id="compare-header"></div>
-  <div class="compat-score"><div class="compat-num" id="compat-num">–%</div><div class="compat-emoji" id="compat-emoji"></div><div class="compat-label">Übereinstimmung</div></div>
-  <div class="card" id="compat-report" style="display:none">
-    <p class="label">Kompatibilitätsbericht</p>
-    <div class="compat-report">
-      <div class="compat-report-col">
-        <p style="font-size:.72rem;color:var(--muted);margin-bottom:4px">Größte Übereinstimmung</p>
-        <div id="compat-best"></div>
-      </div>
-      <div class="compat-report-col">
-        <p style="font-size:.72rem;color:var(--muted);margin-bottom:4px">Größte Unterschiede</p>
-        <div id="compat-worst"></div>
-      </div>
-    </div>
+<!-- ═══ VERBINDUNGEN ═══ -->
+<div id="screen-connections" class="screen">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <span style="font-size:1.1rem;font-weight:700">Andere Gottchas</span>
+    <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-my-profile')">← Zurück</button>
+  </div>
+  <div id="connections-list" style="display:flex;flex-direction:column;gap:10px"></div>
+</div>
+
+<!-- ═══ GRUPPE ═══ -->
+<div id="screen-group" class="screen">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <span style="font-size:1.1rem;font-weight:700">Meine Gruppe</span>
+    <button class="btn btn-ghost btn-sm" onclick="showScreen('screen-connections')">← Zurück</button>
   </div>
   <div class="card">
-    <p class="label">Gesamte Bubble</p>
-    <div style="display:flex;justify-content:center;padding:10px 0"><canvas id="compare-radar" width="300" height="300"></canvas></div>
+    <p class="label">Bubble</p>
+    <div class="net-wrap" style="padding:10px 0"><canvas id="group-radar" width="300" height="300"></canvas></div>
+    <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('group-radar'),'gruppe-bubble')">↓ Als Bild speichern</button>
+    <div id="group-legend" style="display:flex;flex-direction:column;gap:6px;margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- ═══ VERGLEICH ═══ -->
+<div id="screen-compare" class="screen">
+  <div class="compare-header" id="compare-header"></div>
+  <div class="compat-score"><div class="compat-num" id="compat-num">–%</div><div class="compat-emoji" id="compat-emoji"></div><div class="compat-label">Übereinstimmung</div></div>
+  <div class="card">
+    <p class="label">Bubble</p>
+    <div class="net-wrap" style="padding:10px 0"><canvas id="compare-radar" width="300" height="300"></canvas></div>
     <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('compare-radar'),'vergleich-bubble')">↓ Als Bild speichern</button>
-    <div class="legend-row">
+    <div id="compare-stmt-popup" class="stmt-popup"></div>
+    <div class="legend-row" style="margin-top:8px">
       <div style="display:flex;align-items:center;gap:6px;font-size:.8rem"><div class="legend-dot" style="background:var(--accent)"></div><span id="legend-me">Ich</span></div>
       <div style="display:flex;align-items:center;gap:6px;font-size:.8rem"><div class="legend-dot" style="background:var(--accent2)"></div><span id="legend-other">Andere</span></div>
     </div>
-  </div>
-  <div class="card">
-    <p class="label">Bubbles pro Kategorie</p>
-    <div class="cat-accordion" id="cat-accordion"></div>
+    <div class="cat-accordion" id="compare-cat-accordion" style="margin-top:12px"></div>
   </div>
   <div class="countdown-bar" id="countdown-bar" style="display:none">
     <span>Fremdes Gottcha läuft ab in</span><span class="countdown-time" id="countdown-time">–</span>
   </div>
   <button class="btn btn-purple" onclick="sendBackLink()" id="btn-back-link">Rücklink senden →</button>
-  <button class="btn btn-ghost" onclick="showScreen('screen-my-profile')">← Mein Profil</button>
 </div>
 
 <!-- ═══ ANTWORTEN ═══ -->
@@ -654,6 +680,43 @@
     <button class="btn btn-primary" onclick="beendenSaveAndQuit()">Speichern &amp; Beenden</button>
     <button class="btn btn-ghost" style="color:var(--danger);border-color:var(--danger)40" onclick="beendenQuit()">Ohne Speichern beenden</button>
     <button class="btn btn-ghost" onclick="hideBeendenModal()">Abbrechen</button>
+  </div>
+</div>
+
+<!-- CHARLIE DORMANT BUTTON -->
+<button id="charlie-dormant-btn" onclick="charlieOpenDialog()">
+  <canvas id="charlie-mini-canvas" width="42" height="42"></canvas>
+</button>
+
+<!-- CHARLIE DIALOG (post-load / dormant) -->
+<div class="charlie-dialog-overlay" id="charlie-dialog-overlay">
+  <div class="charlie-dialog-box">
+    <canvas id="charlie-dialog-canvas" width="120" height="120" style="display:block;margin:0 auto"></canvas>
+    <div class="charlie-bubble show" id="charlie-dialog-bubble" style="opacity:1;transform:none;display:none"></div>
+    <div id="charlie-dialog-btns" style="display:flex;flex-direction:column;gap:8px;width:100%"></div>
+  </div>
+</div>
+
+<!-- GUIDED TOUR -->
+<div id="tour-wrap">
+  <div id="tour-backdrop" style="position:fixed;inset:0;background:#000000bb;pointer-events:all;cursor:default"></div>
+  <div class="tour-highlight-ring" id="tour-highlight"></div>
+  <div class="tour-tip" id="tour-tip">
+    <div class="tour-tip-title" id="tour-tip-title"></div>
+    <div class="tour-tip-body" id="tour-tip-body"></div>
+    <div class="tour-tip-btns">
+      <button class="btn btn-ghost btn-sm" onclick="tourSkip()">Überspringen</button>
+      <button class="btn btn-primary btn-sm" id="tour-next-btn" onclick="tourNext()">Weiter →</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATEMENT INTRO (first-time charlie overlay on statements) -->
+<div id="stmt-charlie-intro" style="display:none;position:fixed;inset:0;z-index:300;background:#00000099;align-items:flex-start;justify-content:center;padding-top:40px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;max-width:380px;width:90%;display:flex;flex-direction:column;gap:14px;align-items:center">
+    <canvas id="stmt-charlie-canvas" width="120" height="120"></canvas>
+    <div class="charlie-bubble show" style="opacity:1;transform:none;font-size:.88rem">Wähle 1–5, wie sehr du einer Aussage zustimmst. Oder tippe Enthaltung, wenn du kein Urteil hast.</div>
+    <button class="btn btn-primary" onclick="stmtCharlieClose()">Verstanden – los geht's!</button>
   </div>
 </div>
 
@@ -1080,10 +1143,14 @@ let state = {
   selectedScale: null,
   sortMode: 'Zufall',
   shuffledOrder: [],
-  catPrivacy: {}, // catName -> 'full' | 'avg'
-  catOrder: {},   // catName -> array of statement ids in current order
-  mainBubbleOrder: null, // array of CATEGORIES indices for main bubble
+  catPrivacy: {},
+  catOrder: {},
+  mainBubbleOrder: null,
+  hiddenCats: [],
+  abstainReasons: {},
 };
+function getVisibleStatements(){ return state.hiddenCats?.length ? REGULAR_STATEMENTS.filter(s=>!state.hiddenCats.includes(s.main)) : REGULAR_STATEMENTS; }
+function getVisibleCategories(){ return state.hiddenCats?.length ? CATEGORIES.filter(c=>!state.hiddenCats.includes(c)) : CATEGORIES; }
 let incomingProfile  = null;
 let newAvatarDataUrl = null;
 let editAvatarDataUrl= null;
@@ -1092,8 +1159,6 @@ let currentPrivacy   = 1;
 let selectedExpiry   = 3;
 let shareUrl         = '';
 let countdownInterval= null;
-let tutPage          = 0;
-const TUT_PAGES      = 5;
 
 // ══════════════════════════════════════
 // STORAGE
@@ -1167,10 +1232,11 @@ function clearSession(){
   const usedKeys=Object.keys(localStorage).filter(k=>k.startsWith('gottcha_used_'));
   const usedVals=usedKeys.map(k=>localStorage.getItem(k));
   localStorage.removeItem('gottcha_state');
-  localStorage.removeItem('gottcha_incoming');
+  localStorage.removeItem('gottcha_connections');
   usedKeys.forEach((k,i)=>localStorage.setItem(k,usedVals[i]));
-  state={profile:null,answers:{},currentIndex:0,selectedScale:null,sortMode:'Zufall',shuffledOrder:[],catPrivacy:{},catOrder:{},mainBubbleOrder:null};
+  state={profile:null,answers:{},currentIndex:0,selectedScale:null,sortMode:'Zufall',shuffledOrder:[],catPrivacy:{},catOrder:{},mainBubbleOrder:null,hiddenCats:[],abstainReasons:{}};
   incomingProfile=null;
+  _charliePflicht32Shown=false;
   const banner=document.getElementById('resume-banner');
   if(banner) banner.style.display='none';
   const ibanner=document.getElementById('incoming-banner');
@@ -1184,18 +1250,20 @@ function shuffle(arr){
   const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
 }
 function buildOrder(mode){
-  const indices=[...Array(REGULAR_STATEMENTS.length).keys()];
+  const vis=getVisibleStatements();
+  const indices=vis.map((_,i)=>i);
   if(mode==='Zufall') return shuffle(indices);
-  if(mode==='Kategorie') return indices.sort((a,b)=>REGULAR_STATEMENTS[a].main.localeCompare(REGULAR_STATEMENTS[b].main));
-  if(mode==='Alphabetisch') return indices.sort((a,b)=>REGULAR_STATEMENTS[a].text.localeCompare(REGULAR_STATEMENTS[b].text));
+  if(mode==='Kategorie') return indices.sort((a,b)=>vis[a].main.localeCompare(vis[b].main));
+  if(mode==='Alphabetisch') return indices.sort((a,b)=>vis[a].text.localeCompare(vis[b].text));
   return indices;
 }
 function applySort(mode){
   state.sortMode=mode;
   if(mode==='Kategorie'){
-    if(!state.startCat) state.startCat=CATEGORIES[0];
-    const byCategory=[...Array(REGULAR_STATEMENTS.length).keys()].sort((a,b)=>REGULAR_STATEMENTS[a].main.localeCompare(REGULAR_STATEMENTS[b].main));
-    const startIdx=byCategory.findIndex(i=>REGULAR_STATEMENTS[i].main===state.startCat);
+    const vis=getVisibleStatements();
+    if(!state.startCat) state.startCat=vis[0]?.main;
+    const byCategory=vis.map((_,i)=>i).sort((a,b)=>vis[a].main.localeCompare(vis[b].main));
+    const startIdx=byCategory.findIndex(i=>vis[i].main===state.startCat);
     state.shuffledOrder=[...byCategory.slice(startIdx),...byCategory.slice(0,startIdx)];
   } else {
     state.shuffledOrder=buildOrder(mode);
@@ -1205,7 +1273,7 @@ function applySort(mode){
   renderStatement();
   renderSortBar();
 }
-function currentStmt(){ return REGULAR_STATEMENTS[state.shuffledOrder[state.currentIndex]]; }
+function currentStmt(){ return getVisibleStatements()[state.shuffledOrder[state.currentIndex]]; }
 
 // ══════════════════════════════════════
 // INCOMING
@@ -1224,20 +1292,174 @@ function checkIncomingLink(){
       toast('Dieser Link wurde bereits geöffnet.'); window.history.replaceState({},'',window.location.pathname); return;
     }
     if(inc.token) localStorage.setItem(usedKey,'1');
-    localStorage.setItem('gottcha_incoming', JSON.stringify(inc));
+    _connectionsAddOrUpdate(inc);
     window.history.replaceState({},'',window.location.pathname);
+    incomingProfile=inc;
+    // try to close this tab — works if opened via link from another app
+    setTimeout(()=>window.close(),300);
   }catch(e){ toast('Ungültiger Link.'); }
 }
 
+// ── CONNECTIONS (multi-profile exchange) ──
+let _connections=[];
+function _connectionsSave(){ localStorage.setItem('gottcha_connections',JSON.stringify(_connections)); }
 function checkAndLoadIncoming(){
-  const raw=localStorage.getItem('gottcha_incoming'); if(!raw) return;
+  // migrate legacy single entry
+  const legacy=localStorage.getItem('gottcha_incoming');
+  if(legacy){ try{ _connectionsAddOrUpdate(JSON.parse(legacy)); }catch(e){} localStorage.removeItem('gottcha_incoming'); }
+  // load array
+  try{ _connections=JSON.parse(localStorage.getItem('gottcha_connections')||'[]'); }catch(e){ _connections=[]; }
+  // prune expired
+  const before=_connections.length;
+  _connections=_connections.filter(c=>!c.expiresAt||c.expiresAt===0||Date.now()<c.expiresAt);
+  if(_connections.length!==before) _connectionsSave();
+  // set incomingProfile to most recent for backward compat
+  incomingProfile=_connections[0]||null;
+}
+function _connectionsAddOrUpdate(inc){
   try{
-    const inc=JSON.parse(raw);
-    if(inc.expiresAt && inc.expiresAt>0 && Date.now()>inc.expiresAt){
-      localStorage.removeItem('gottcha_incoming'); return;
+    _connections=JSON.parse(localStorage.getItem('gottcha_connections')||'[]');
+  }catch(e){ _connections=[]; }
+  const name=inc.p?.n||'?';
+  const existing=_connections.findIndex(c=>c.p?.n===name);
+  inc.addedAt=inc.addedAt||Date.now();
+  if(existing>=0) _connections[existing]=inc; else _connections.unshift(inc);
+  _connectionsSave();
+}
+function deleteConnection(idx){
+  const del=_connections[idx];
+  _connections.splice(idx,1); _connectionsSave();
+  if(incomingProfile===del||_connections.length===0) incomingProfile=_connections[0]||null;
+  renderConnections();
+}
+function viewConnection(idx){
+  incomingProfile=_connections[idx];
+  showScreen('screen-compare');
+}
+let _groupSelecting=false;
+let _groupSelected=new Set();
+const _GROUP_PALETTE=['#e74c3c','#e67e22','#2ecc71','#3498db','#9b59b6','#f39c12','#1abc9c','#e91e63'];
+
+function renderConnections(){
+  const list=document.getElementById('connections-list'); if(!list) return;
+  if(!_connections.length){
+    list.innerHTML='<p style="color:var(--muted);font-size:.9rem;text-align:center;padding:24px 0">Noch keine Verbindungen.<br>Schick deinen Link an jemanden!</p>';
+    _groupSelecting=false; _groupSelected.clear();
+    return;
+  }
+  list.innerHTML='';
+
+  // group button bar at top
+  const topBar=document.createElement('div');
+  topBar.style.cssText='display:flex;gap:8px;margin-bottom:4px';
+  if(!_groupSelecting){
+    const btn=document.createElement('button');
+    btn.className='btn btn-ghost btn-sm';
+    btn.textContent='Gruppe zusammenstellen';
+    btn.onclick=()=>{ _groupSelecting=true; _groupSelected.clear(); renderConnections(); };
+    topBar.appendChild(btn);
+  } else {
+    const cancel=document.createElement('button');
+    cancel.className='btn btn-ghost btn-sm';
+    cancel.textContent='Abbrechen';
+    cancel.onclick=()=>{ _groupSelecting=false; _groupSelected.clear(); renderConnections(); };
+    topBar.appendChild(cancel);
+  }
+  list.appendChild(topBar);
+
+  _connections.forEach((c,i)=>{
+    const name=c.p?.n||'?';
+    const av=c.p?.av?`<img src="${esc(c.p.av)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:'🙂';
+    const exp=c.expiresAt&&c.expiresAt>0?_fmtExpiry(c.expiresAt):'kein Ablauf';
+    const expired=c.expiresAt&&c.expiresAt>0&&Date.now()>c.expiresAt;
+    const allowsGroup=c.p?.alg!==false;
+    const selectable=_groupSelecting&&!expired&&allowsGroup;
+    const checked=_groupSelected.has(i);
+    const card=document.createElement('div');
+    card.style.cssText=`display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid ${checked?'var(--accent)':'var(--border)'};border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color .15s`;
+    card.innerHTML=`
+      ${_groupSelecting?`<div class="conn-card-check${checked?' checked':''}${(!allowsGroup||expired)?' disabled':''}">${checked?'✓':''}</div>`:''}
+      <div style="width:44px;height:44px;border-radius:50%;border:2px solid var(--accent2);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">${av}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:.95rem">${esc(name)}</div>
+        <div style="font-size:.75rem;color:${expired?'var(--danger)':'var(--muted)'}">
+          ${expired?'abgelaufen':exp}${_groupSelecting&&!allowsGroup?' · Gruppen nicht erlaubt':''}
+        </div>
+      </div>
+      ${!_groupSelecting?`<button class="btn btn-ghost btn-sm" style="color:var(--danger);border-color:var(--danger)40;flex-shrink:0" onclick="event.stopPropagation();deleteConnection(${i})">✕</button>`:''}`;
+    if(_groupSelecting){
+      if(selectable) card.onclick=()=>{
+        if(_groupSelected.has(i)) _groupSelected.delete(i); else _groupSelected.add(i);
+        renderConnections();
+      };
+    } else {
+      if(!expired) card.onclick=()=>viewConnection(i);
     }
-    incomingProfile=inc;
-  }catch(e){}
+    list.appendChild(card);
+  });
+
+  // sticky bottom bar when selecting
+  if(_groupSelecting){
+    const bar=document.createElement('div');
+    bar.className='conn-select-bar visible';
+    const n=_groupSelected.size;
+    bar.innerHTML=`<span style="font-size:.88rem;color:var(--muted)">${n} ausgewählt</span>
+      <button class="btn btn-primary btn-sm" ${n===0?'disabled':''} onclick="openGroup()">Gruppe anzeigen →</button>`;
+    list.appendChild(bar);
+  }
+}
+
+function openGroup(){
+  if(_groupSelected.size===0) return;
+  showScreen('screen-group');
+  renderGroup();
+}
+
+function renderGroup(){
+  const canvas=document.getElementById('group-radar'); if(!canvas) return;
+  const legend=document.getElementById('group-legend'); if(!legend) return;
+  const myAns=state.answers;
+  const myAvgs=getCategoryAverages(myAns);
+  const visCats=getVisibleCategories();
+  if(!state.mainBubbleOrder||state.mainBubbleOrder.length!==visCats.length)
+    state.mainBubbleOrder=[...Array(visCats.length).keys()];
+  const orderedCats=state.mainBubbleOrder.map(i=>visCats[i]);
+
+  const datasets=[
+    {values:orderedCats.map(c=>myAvgs[c]||0), color:getAccent(), label:state.profile?.nickname||'Ich'},
+  ];
+  let colorIdx=0;
+  [..._groupSelected].forEach(i=>{
+    const c=_connections[i]; if(!c) return;
+    const avgs=getCategoryAverages(c.a||{});
+    datasets.push({values:orderedCats.map(cat=>avgs[cat]||0), color:_GROUP_PALETTE[colorIdx++%_GROUP_PALETTE.length], label:c.p?.n||'?'});
+  });
+
+  drawRadar(canvas.getContext('2d'),300,orderedCats,datasets,'group-radar');
+
+  legend.innerHTML=datasets.map(d=>`
+    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem">
+      <div style="width:12px;height:12px;border-radius:50%;background:${d.color};flex-shrink:0"></div>
+      <span>${esc(d.label)}</span>
+    </div>`).join('');
+}
+
+function toggleAllowGroups(){
+  state.allowGroups = state.allowGroups===false ? true : false;
+  _syncAllowGroupsBtn();
+  saveToStorage();
+}
+function _syncAllowGroupsBtn(){
+  const btn=document.getElementById('allow-groups-btn'); if(!btn) return;
+  const on=state.allowGroups!==false;
+  btn.textContent=on?'Ja':'Nein';
+  btn.classList.toggle('on',on);
+}
+
+function _fmtExpiry(ts){
+  const diff=ts-Date.now(); if(diff<=0) return 'abgelaufen';
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
+  return'läuft ab in '+(d>0?`${d}T ${h}Std`:h>0?`${h}Std ${m}Min`:`${m} Min`);
 }
 
 function scheduleExpiryCheck(){
@@ -1246,7 +1468,6 @@ function scheduleExpiryCheck(){
   countdownInterval=setInterval(()=>{
     if(Date.now()>incomingProfile.expiresAt){
       clearInterval(countdownInterval);
-      localStorage.removeItem('gottcha_incoming');
       incomingProfile=null;
       toast('Fremdes Gottcha ist abgelaufen und wurde gelöscht.');
     } else { updateCountdown(); }
@@ -1273,6 +1494,7 @@ function showScreen(id){
   if(id==='screen-edit-profile') renderPaletteRow();
   if(id==='screen-my-profile')   { renderMyProfile(); renderPaletteRow(); }
   if(id==='screen-review')       renderReview();
+  if(id==='screen-connections')  renderConnections();
   if(id==='screen-compare')      renderCompare();
   if(id==='screen-share')        renderShareScreen();
   if(id==='screen-edit-profile') initEditProfile();
@@ -1285,13 +1507,8 @@ function showScreen(id){
 // START
 // ══════════════════════════════════════
 function initStart(){
-  drawStartRadar();
   checkAndLoadIncoming();
-  if(incomingProfile){
-    document.getElementById('incoming-banner').style.display='block';
-    document.getElementById('incoming-name').textContent=incomingProfile.p?.n||'?';
-    scheduleExpiryCheck();
-  }
+  if(incomingProfile) scheduleExpiryCheck();
   if(loadFromStorage()&&state.profile){
     if(!state.shuffledOrder||!state.shuffledOrder.length) state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
     if(incomingProfile) setTimeout(()=>showScreen('screen-compare'),400);
@@ -1304,44 +1521,430 @@ function resumeSession(){
   if(pflichtDone){ showScreen('screen-my-profile'); }
   else { pflIdx=PFLICHT_STATEMENTS.findIndex(s=>state.answers[s.id]===undefined); if(pflIdx<0)pflIdx=0; showScreen('screen-pflicht'); }
 }
-function goToProfile(){
+function goToProfile(prefill=false){
   showScreen('screen-profile');
-  document.getElementById('nickname-lock-hint').style.display=state.profile?'none':'block';
-  if(state.profile) populateProfileForm();
-  newAvatarDataUrl=null;
+  document.getElementById('nickname-lock-hint').style.display='block';
+  if(prefill&&state.profile) populateProfileForm();
+  else{
+    ['p-nickname','p-age','p-city','p-bio','p-free'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    newAvatarDataUrl=null;setAvatarPreview('avatar-preview-wrap',null);setPrivacy(1);
+  }
 }
 
 // ══════════════════════════════════════
-// TUTORIAL
+// CHARLIE
 // ══════════════════════════════════════
-function initTutorial(){
-  tutPage=0; renderTutPage();
-  // draw sample radar in tut
+const _CH_BASE_A=[0.72,0.48,0.85,0.38,0.91,0.62];
+const _CH_BASE_B=[0.41,0.76,0.52,0.81,0.33,0.67];
+const _CH_FRQ_A =[0.38,0.52,0.31,0.44,0.29,0.57];
+const _CH_FRQ_B =[0.43,0.27,0.61,0.35,0.48,0.33];
+const _CH_PHS_A =[0,1.1,2.2,0.7,1.8,3.0];
+const _CH_PHS_B =[0.9,2.1,0.4,1.6,2.8,0.2];
+const _CH_AMP=0.075, _CH_N=6;
+let _charlieT=0, _charlieMasterRaf=null;
+let _charlieIdx=0, _charliePrivacy=1, _charlieNewAvatar=null;
+let _charlieHiddenCats=[], _charlieName='', _charlieFromTutorial=false;
+let _editHiddenCats=[];
+let _charliePflicht32Shown=false;
+
+const _CS=[
+  {id:'intro'},
+  {id:'bubble',text:'Hey, willkommen bei Gottcha 👋',btn:'Weiter'},
+  {id:'bubble',text:'Hier siehst du, wer du bist – und wie du zu anderen stehst.',btn:'Weiter'},
+  {id:'bubble',text:'Du beantwortest Fragen auf einer Skala von 1 bis 5. Deine Antworten formen deine Bubble. Die sieht später so ähnlich aus wie ich.',btn:'Weiter'},
+  {id:'bubble',text:'Alles bleibt auf deinem Gerät. Lad dein Gottcha runter, wenn du es behalten willst.',btn:'Weiter'},
+  {id:'bubble',text:'Nutz es, um Freunde besser kennenzulernen – oder eine gute Diskussion zu starten.',btn:'Alles klar 👍'},
+  {id:'choice',text:'Willst du dein Gottcha erstellen?'},
+  {id:'thinking'},
+  {id:'name',text:'Wer bist du?'},
+  {id:'privacy',text:'Willst du etwas von dir erzählen?'},
+  {id:'details',text:'Was soll man über dich wissen?'},
+  {id:'avatar',text:'Willst du ein Bild hochladen?'},
+  {id:'colors',text:'Färb mich ein!'},
+  {id:'categories',text:'Worüber möchtest du reden?'},
+  {id:'ready',text:'Bereit für die Statements?'},
+];
+
+function _drawCharlieCtx(ctx,size,t,alwaysColors=false){
+  const light=document.body.classList.contains('light');
+  const useColors=alwaysColors||_charlieIdx>=12||document.getElementById('charlie-dialog-overlay')?.classList.contains('visible');
+  const defaultStroke=light?'#1a1a2e':'#e8e8f0';
+  const strokeA=useColors?selectedA:defaultStroke;
+  const strokeB=useColors?selectedB:defaultStroke;
+  const fillA=useColors?(selectedA+'28'):(light?'rgba(0,0,0,0.10)':'rgba(255,255,255,0.11)');
+  const fillB=useColors?(selectedB+'18'):(light?'rgba(0,0,0,0.05)':'rgba(255,255,255,0.05)');
+  const gridStroke=useColors?(selectedA+'30'):(defaultStroke+'40');
+  const axisStroke=useColors?(selectedA+'1a'):(defaultStroke+'28');
+  const cx=size/2,cy=size/2,maxR=size*0.38,step=(Math.PI*2)/_CH_N,S=-Math.PI/2;
+  ctx.clearRect(0,0,size,size);
+  for(let r=1;r<=4;r++){
+    ctx.beginPath();
+    for(let i=0;i<=_CH_N;i++){const a=S+i*step,rr=maxR*(r/4);i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);}
+    ctx.closePath();ctx.strokeStyle=gridStroke;ctx.lineWidth=0.8;ctx.stroke();
+  }
+  for(let i=0;i<_CH_N;i++){const a=S+i*step;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*maxR,cy+Math.sin(a)*maxR);ctx.strokeStyle=axisStroke;ctx.lineWidth=0.8;ctx.stroke();}
+  function drawDS(base,frq,phs,fill,stk){
+    const vals=base.map((b,i)=>Math.max(0.05,Math.min(1,b+_CH_AMP*Math.sin(2*Math.PI*frq[i]*t+phs[i]))));
+    const pts=vals.map((v,i)=>{const a=S+i*step;return{x:cx+Math.cos(a)*maxR*v,y:cy+Math.sin(a)*maxR*v};});
+    ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=0;i<_CH_N;i++){const p0=pts[(i-1+_CH_N)%_CH_N],p1=pts[i],p2=pts[(i+1)%_CH_N],p3=pts[(i+2)%_CH_N];const cp1x=p1.x+(p2.x-p0.x)/BUBBLE_T,cp1y=p1.y+(p2.y-p0.y)/BUBBLE_T,cp2x=p2.x-(p3.x-p1.x)/BUBBLE_T,cp2y=p2.y-(p3.y-p1.y)/BUBBLE_T;ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,p2.x,p2.y);}
+    ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stk;ctx.lineWidth=2;ctx.stroke();
+    pts.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fillStyle=stk;ctx.fill();});
+  }
+  drawDS(_CH_BASE_A,_CH_FRQ_A,_CH_PHS_A,fillA,strokeA+'cc');
+  drawDS(_CH_BASE_B,_CH_FRQ_B,_CH_PHS_B,fillB,strokeB+'77');
+}
+
+function _startCharlieLoop(){
+  if(_charlieMasterRaf) return;
+  let last=performance.now();
+  function frame(now){_charlieT+=(now-last)/1000;last=now;
+    ['charlie-canvas','charlie-mini-canvas','charlie-dialog-canvas','stmt-charlie-canvas','profile-color-canvas','start-charlie-canvas'].forEach(id=>{
+      const c=document.getElementById(id);
+      if(!c||!c.getBoundingClientRect().width) return;
+      _drawCharlieCtx(c.getContext('2d'),c.width,_charlieT,id==='profile-color-canvas');
+    });
+    _charlieMasterRaf=requestAnimationFrame(frame);}
+  _charlieMasterRaf=requestAnimationFrame(frame);
+}
+
+function charlieBegin(){
+  _charlieIdx=0;_charliePrivacy=1;_charlieNewAvatar=null;
+  _charlieHiddenCats=[];_charlieName='';_charlieFromTutorial=true;
+  showScreen('screen-charlie');
+  _startCharlieLoop();
+  charlieRender();
+}
+
+function charlieGo(idx){_charlieIdx=idx;charlieRender();}
+
+function _charlieBubble(text){
+  const b=document.getElementById('charlie-bubble');if(!b)return;
+  b.classList.remove('show');b.textContent=text||'';
+  if(text)setTimeout(()=>b.classList.add('show'),60);
+}
+
+function _charliePrivHint(){
+  if(_charliePrivacy===1)return'Nur Nickname und Avatar – alles andere bleibt privat.';
+  if(_charliePrivacy===2)return'Zusätzlich Alter, Stadt und kurze Bio.';
+  return'Alles was du teilen möchtest – inklusive Links und freiem Text.';
+}
+
+function charlieRender(){
+  const step=_CS[_charlieIdx];
+  const content=document.getElementById('charlie-content');
+  const btns=document.getElementById('charlie-btns');
+  if(!step||!content||!btns)return;
+  content.innerHTML='';btns.innerHTML='';
+  const backBtn=document.getElementById('charlie-back-btn');
+  if(backBtn)backBtn.style.display=_charlieIdx>=7?'none':'';
+  switch(step.id){
+    case'intro':
+      _charlieBubble('');
+      setTimeout(()=>charlieGo(1),500);
+      break;
+    case'bubble':
+      _charlieBubble(step.text);
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">${step.btn||'Weiter →'}</button>`;
+      break;
+    case'thinking':
+      _charlieBubble('...');
+      setTimeout(()=>charlieGo(_charlieIdx+1),900);
+      break;
+    case'choice':
+      _charlieBubble(step.text);
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Create new Gottcha</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('charlie-upload-file').click()">Upload Gottcha</button>
+        <input type="file" id="charlie-upload-file" accept=".gottcha,.json" onchange="loadProfile(event)" style="display:none">`;
+      break;
+    case'name':
+      _charlieBubble(step.text);
+      content.innerHTML=`<div class="card"><div class="field">
+        <label style="font-size:.85rem;color:var(--muted)">Dein Nickname</label>
+        <input type="text" id="charlie-name-input" placeholder="Name eingeben..." maxlength="30">
+        <div class="nickname-lock" style="display:block;margin-top:6px">⚠️ Der Nickname kann später nicht mehr geändert werden.</div>
+      </div></div>`;
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieSetName()">Weiter →</button>`;
+      setTimeout(()=>document.getElementById('charlie-name-input')?.focus(),120);
+      break;
+    case'privacy':{
+      _charlieBubble(step.text);
+      content.innerHTML=`<div class="priv-mini-tabs">
+        <div class="priv-mini-tab ${_charliePrivacy===1?'active':''}" onclick="charlieSetPrivacy(1)">Nein</div>
+        <div class="priv-mini-tab ${_charliePrivacy===2?'active':''}" onclick="charlieSetPrivacy(2)">Ein bisschen</div>
+        <div class="priv-mini-tab ${_charliePrivacy===3?'active':''}" onclick="charlieSetPrivacy(3)">Ja</div>
+      </div>
+      <div id="charlie-priv-hint" style="font-size:.78rem;color:var(--muted);line-height:1.5;text-align:center;min-height:36px">${_charliePrivHint()}</div>`;
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Weiter →</button>`;
+      break;}
+    case'details':
+      if(_charliePrivacy===1){charlieGo(_charlieIdx+1);return;}
+      _charlieBubble(step.text);
+      content.innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div class="field"><label>Alter</label><input type="number" id="ch-age" min="1" max="120"></div>
+        <div class="field"><label>Stadt</label><input type="text" id="ch-city" maxlength="60"></div>
+        <div class="field"><label>Kurz über mich</label><textarea id="ch-bio" maxlength="300"></textarea></div>
+        ${_charliePrivacy>=3?'<div class="field"><label>Freier Text</label><textarea id="ch-free" maxlength="600" style="min-height:90px"></textarea></div>':''}
+      </div>`;
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Weiter →</button>`;
+      break;
+    case'avatar':
+      _charlieBubble(step.text);
+      content.innerHTML=`<div class="avatar-drop" onclick="document.getElementById('ch-avatar-file').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+        <div class="avatar-drop-preview" id="ch-av-preview">${_charlieNewAvatar?`<img src="${_charlieNewAvatar}">`:'🙂'}</div>
+        <div class="avatar-drop-hint">Bild hierher ziehen oder tippen</div>
+      </div>
+      <input type="file" id="ch-avatar-file" accept="image/*" onchange="charlieHandleAvatar(event)" style="display:none">`;
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Weiter →</button>`;
+      break;
+    case'colors':
+      _charlieBubble(step.text);
+      content.innerHTML=`<div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div><p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 1 – du</p><div class="palette-row" id="ch-pal-a"></div></div>
+        <div><p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Farbe 2 – andere</p><div class="palette-row" id="ch-pal-b"></div></div>
+      </div>`;
+      setTimeout(()=>renderCharliePalette(),10);
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Weiter →</button>`;
+      break;
+    case'categories':
+      _charlieBubble(step.text);
+      charlieRenderCategorySection(content);
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieGo(${_charlieIdx+1})">Weiter →</button>`;
+      break;
+    case'ready':
+      _charlieBubble(step.text);
+      btns.innerHTML=`<button class="btn btn-primary" onclick="charlieFinish()">Ja – Los geht's 🚀</button>
+        <button class="btn btn-ghost" onclick="charlieGoToProfile()">Nein – Profil bearbeiten</button>`;
+      break;
+  }
+  if(_charlieIdx>=8 && _charlieIdx<=14 && step.id!=='thinking'){
+    const backB=document.createElement('button');
+    backB.className='btn btn-ghost';backB.textContent='← Zurück';
+    backB.onclick=charlieBack;btns.appendChild(backB);
+  }
+}
+
+function charlieBack(){
+  let prev=_charlieIdx-1;
+  if(_CS[prev]?.id==='thinking') prev--;
+  if(_CS[prev]?.id==='details'&&_charliePrivacy===1) prev--;
+  charlieGo(Math.max(6,prev));
+}
+
+function charlieSetName(){
+  const val=document.getElementById('charlie-name-input')?.value.trim();
+  if(!val){toast('Bitte gib einen Namen ein.');return;}
+  _charlieName=val;charlieGo(_charlieIdx+1);
+}
+function charlieSetPrivacy(level){
+  _charliePrivacy=level;
+  document.querySelectorAll('.priv-mini-tab').forEach((t,i)=>t.classList.toggle('active',i+1===level));
+  const hint=document.getElementById('charlie-priv-hint');
+  if(hint)hint.textContent=_charliePrivHint();
+}
+function charlieHandleAvatar(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{_charlieNewAvatar=ev.target.result;const el=document.getElementById('ch-av-preview');if(el)el.innerHTML=`<img src="${_charlieNewAvatar}">`;};
+  reader.readAsDataURL(file);
+}
+function renderCharliePalette(){
+  ['a','b'].forEach(which=>{
+    const row=document.getElementById('ch-pal-'+which);if(!row)return;
+    row.innerHTML='';
+    COLOR_OPTIONS.forEach(c=>{
+      const active=(which==='a'?selectedA:selectedB)===c;
+      const sw=document.createElement('div');
+      sw.className='palette-swatch'+(active?' active':'');sw.style.background=c;sw.title=c;
+      sw.onclick=()=>{const other=which==='a'?selectedB:selectedA;if(c===other){toast('Beide Farben müssen unterschiedlich sein.');return;}applyColors(which==='a'?c:selectedA,which==='b'?c:selectedB);renderCharliePalette();};
+      row.appendChild(sw);
+    });
+  });
+}
+function _renderCatSection(container,hiddenCats,cbName){
+  const cats=CATEGORIES,n=cats.length,half=Math.ceil(n/2);
+  const sz=180,cx=sz/2,cy=sz/2,outerR=sz*0.46,innerR=sz*0.26;
+  const angStep=(Math.PI*2)/n,S=-Math.PI/2,gap=0.05;
+  let paths='';
+  cats.forEach((cat,i)=>{
+    const a1=S+i*angStep+gap/2,a2=S+(i+1)*angStep-gap/2;
+    const x1o=cx+Math.cos(a1)*outerR,y1o=cy+Math.sin(a1)*outerR;
+    const x2o=cx+Math.cos(a2)*outerR,y2o=cy+Math.sin(a2)*outerR;
+    const x1i=cx+Math.cos(a1)*innerR,y1i=cy+Math.sin(a1)*innerR;
+    const x2i=cx+Math.cos(a2)*innerR,y2i=cy+Math.sin(a2)*innerR;
+    const large=(a2-a1)>Math.PI?1:0;
+    const active=!hiddenCats.includes(cat);
+    const d=`M${x1i},${y1i}L${x1o},${y1o}A${outerR},${outerR},0,${large},1,${x2o},${y2o}L${x2i},${y2i}A${innerR},${innerR},0,${large},0,${x1i},${y1i}Z`;
+    paths+=`<path d="${d}" fill="${active?'var(--accent)':'var(--border)'}" opacity="${active?'0.85':'0.35'}" style="cursor:pointer;transition:all .2s" onclick="${cbName}(${i})"/>`;
+  });
+  const leftCats=cats.slice(0,half),rightCats=cats.slice(half);
+  const pillH=list=>list.map(cat=>{const a=!hiddenCats.includes(cat);return`<div class="cat-toggle-pill ${a?'active':''}" onclick="${cbName}(${cats.indexOf(cat)})">${cat}</div>`;}).join('');
+  container.innerHTML=`<div style="display:flex;gap:8px;align-items:center;justify-content:center">
+    <div style="flex:1;display:flex;flex-direction:column;gap:5px">${pillH(leftCats)}</div>
+    <svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" style="flex-shrink:0">${paths}</svg>
+    <div style="flex:1;display:flex;flex-direction:column;gap:5px">${pillH(rightCats)}</div>
+  </div>
+  <p style="font-size:.75rem;color:var(--muted);text-align:center">Farbig = aktiv · Grau = wird ausgeblendet</p>`;
+}
+function charlieRenderCategorySection(container){_renderCatSection(container,_charlieHiddenCats,'charlieToggleCatIdx');}
+function charlieToggleCatIdx(i){charlieToggleCat(CATEGORIES[i]);}
+function editToggleCatIdx(i){
+  const cat=CATEGORIES[i],idx=_editHiddenCats.indexOf(cat);
+  if(idx>=0)_editHiddenCats.splice(idx,1);else _editHiddenCats.push(cat);
+  const grid=document.getElementById('hidden-cats-grid');
+  if(grid)_renderCatSection(grid,_editHiddenCats,'editToggleCatIdx');
+}
+function charlieToggleCat(cat){
+  const idx=_charlieHiddenCats.indexOf(cat);
+  if(idx>=0)_charlieHiddenCats.splice(idx,1);else _charlieHiddenCats.push(cat);
+  const content=document.getElementById('charlie-content');if(content)charlieRenderCategorySection(content);
+}
+function charlieGoToProfile(){
+  showScreen('screen-profile');
+  document.getElementById('nickname-lock-hint').style.display='block';
+  if(_charlieName)document.getElementById('p-nickname').value=_charlieName;
+  setPrivacy(_charliePrivacy);
+  newAvatarDataUrl=_charlieNewAvatar;
+  if(newAvatarDataUrl)setAvatarPreview('avatar-preview-wrap',newAvatarDataUrl);
+}
+function charlieFinish(){
+  if(!_charlieName){toast('Kein Name vergeben.');charlieGo(8);return;}
+  state.profile={
+    nickname:_charlieName,privacyLevel:_charliePrivacy,avatarDataUrl:_charlieNewAvatar,
+    age:document.getElementById('ch-age')?.value.trim()||'',
+    city:document.getElementById('ch-city')?.value.trim()||'',
+    bio:document.getElementById('ch-bio')?.value.trim()||'',
+    free:document.getElementById('ch-free')?.value.trim()||'',
+  };
+  state.hiddenCats=_charlieHiddenCats;state.mainBubbleOrder=null;
+  if(!state.shuffledOrder?.length)state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
+  saveToStorage();saveProfileToDB();
+  _charlieFromTutorial=true;
+  startPflicht();
+}
+
+// ── CHARLIE DIALOG (nav hub) ──
+const _CHARLIE_SCREEN_TIPS={
+  'screen-statements':'Die Skala geht von 1 (stimme gar nicht zu) bis 5 (stimme voll zu). Enthaltung ist immer möglich.',
+  'screen-review':'Hier kannst du alle Antworten nachträglich ändern – oder bei Enthaltungen eine Begründung ergänzen.',
+};
+let _currentScreen='screen-start';
+function charliePostLoad(){} // no auto-popup
+function charlieOpenDialog(){
+  if(!state.profile?.nickname)return;
+  _startCharlieLoop();
+  const bubble=document.getElementById('charlie-dialog-bubble');
+  if(bubble){bubble.textContent='';bubble.style.display='none';}
+  const btnsEl=document.getElementById('charlie-dialog-btns');
+  if(!btnsEl)return;
+  const hasTip=_currentScreen==='screen-my-profile'||!!_CHARLIE_SCREEN_TIPS[_currentScreen];
+  const nav=[
+    {l:'Statements fortsetzen',a:'charlieDialogNav(continueStatements)'},
+    {l:'Link teilen',a:"charlieDialogNav(()=>showScreen('screen-share'))",locked:!PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined)},
+    {l:'Andere Gottchas',a:"charlieDialogNav(()=>showScreen('screen-connections'))"},
+    {l:'Mein Profil',a:"charlieDialogNav(()=>showScreen('screen-my-profile'))"},
+    {l:'Profil bearbeiten',a:"charlieDialogNav(()=>showScreen('screen-edit-profile'))"},
+    {l:'Startseite',a:"charlieDialogNav(()=>showScreen('screen-start'))"},
+    {l:'Als Datei speichern',a:'charlieDialogNav(exportProfile)'},
+    {l:'Gottcha beenden',a:'charlieDialogNav(showBeendenModal)',danger:true},
+  ];
+  let html='';
+  if(hasTip) html+=`<button class="btn btn-primary" onclick="charlieExplainScreen()">Ansicht erklären</button><hr style="border:none;border-top:1px solid var(--border);margin:2px 0">`;
+  html+=nav.map(n=>{
+    const style=n.danger?'color:var(--danger);border-color:var(--danger)40':n.locked?'opacity:.45;cursor:not-allowed':'';
+    const click=n.locked?'toast("Beantworte zuerst alle 32 Pflicht-Statements.")':n.a;
+    return`<button class="btn btn-ghost" style="${style}" onclick="${click}">${n.l}${n.locked?' 🔒':''}</button>`;
+  }).join('');
+  html+=`<hr style="border:none;border-top:1px solid var(--border);margin:2px 0"><button class="btn btn-ghost" onclick="charlieDialogDismiss()">Schließen</button>`;
+  btnsEl.innerHTML=html;
+  document.getElementById('charlie-dialog-overlay').classList.add('visible');
+}
+function charlieExplainScreen(){
+  if(_currentScreen==='screen-my-profile'){
+    charlieDialogDismiss();
+    setTimeout(charlieStartTour,350);
+    return;
+  }
+  const text=_CHARLIE_SCREEN_TIPS[_currentScreen];if(!text)return;
+  const bubble=document.getElementById('charlie-dialog-bubble');
+  if(bubble){bubble.textContent=text;bubble.style.display='';}
+  const btnsEl=document.getElementById('charlie-dialog-btns');
+  if(btnsEl)btnsEl.innerHTML=`<button class="btn btn-primary" onclick="charlieDialogDismiss()">Alles klar!</button>`;
+}
+function charlieDialogNav(fn){
+  document.getElementById('charlie-dialog-overlay').classList.remove('visible');
+  fn();
+}
+function charlieDialogDismiss(){
+  document.getElementById('charlie-dialog-overlay').classList.remove('visible');
+}
+
+// ── STATEMENT INTRO ──
+function stmtCharlieShow(){
+  if(!_charlieFromTutorial)return;
+  const el=document.getElementById('stmt-charlie-intro');
+  if(el){el.style.display='flex';_startCharlieLoop();}
+}
+function stmtCharlieClose(){
+  document.getElementById('stmt-charlie-intro').style.display='none';
+  _charlieFromTutorial=false;
+}
+
+// ── GUIDED TOUR ──
+let _tourIdx=0;
+const _TOUR=[
+  {sel:'#my-radar',title:'Deine Bubble',body:'Tippe auf ein Segment um die Kategorie oben anzupinnen. Nochmal tippen – wieder loslösen.'},
+  {sel:'#my-action-grid',title:'Aktionen',body:'Hier teilst du deinen Link, speicherst dein Gottcha oder bearbeitest deine Antworten.'},
+  {sel:'#btn-share-link',title:'Link teilen',body:'Schick diesen Link an jemanden. Sobald er sein Gottcha erstellt, seht ihr euren Vergleich.'},
+];
+function charlieStartTour(){
+  document.getElementById('charlie-dialog-overlay').classList.remove('visible');
+  _tourIdx=0;_tourShow();
+}
+function _tourShow(){
+  const wrap=document.getElementById('tour-wrap');
+  const step=_TOUR[_tourIdx];
+  if(!step){tourSkip();return;}
+  const el=document.querySelector(step.sel);
+  if(!el){_tourIdx++;_tourShow();return;}
+  el.scrollIntoView({behavior:'smooth',block:'center'});
   setTimeout(()=>{
-    const svg=document.getElementById('tut-radar'); if(!svg) return;
-    const n=6,cx=80,cy=80,maxR=60,step=(Math.PI*2)/n,start=-Math.PI/2;
-    const v=[0.8,0.5,0.9,0.3,0.7,0.6],v2=[0.4,0.8,0.5,0.7,0.3,0.9];
-    let html='';
-    for(let r=1;r<=4;r++){let pts='';for(let i=0;i<n;i++){const a=start+i*step,rr=maxR*(r/4);pts+=`${cx+Math.cos(a)*rr},${cy+Math.sin(a)*rr} `;}html+=`<polygon points="${pts}" fill="none" stroke="#2a2a32" stroke-width="1"/>`;}
-    for(let i=0;i<n;i++){const a=start+i*step;html+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(a)*maxR}" y2="${cy+Math.sin(a)*maxR}" stroke="#2a2a3288" stroke-width="1"/>`;}
-    let p1='',p2='';for(let i=0;i<n;i++){const a=start+i*step;p1+=`${cx+Math.cos(a)*maxR*v[i]},${cy+Math.sin(a)*maxR*v[i]} `;p2+=`${cx+Math.cos(a)*maxR*v2[i]},${cy+Math.sin(a)*maxR*v2[i]} `;}
-    html+=`<polygon points="${p1}" fill="${getAccent()}55" stroke="${getAccent()}" stroke-width="2"/>`;
-    html+=`<polygon points="${p2}" fill="${getAccent2()}55" stroke="${getAccent2()}" stroke-width="2"/>`;
-    svg.innerHTML=html;
-  },100);
+    const r=el.getBoundingClientRect(),pad=8;
+    const hl=document.getElementById('tour-highlight');
+    hl.style.cssText=`position:fixed;left:${r.left-pad}px;top:${r.top-pad}px;width:${r.width+pad*2}px;height:${r.height+pad*2}px;border-radius:14px;box-shadow:0 0 0 9999px rgba(0,0,0,0.75);pointer-events:none;z-index:2;`;
+    document.getElementById('tour-tip-title').textContent=step.title;
+    document.getElementById('tour-tip-body').textContent=step.body;
+    const tip=document.getElementById('tour-tip');
+    const below=r.bottom+pad+140<window.innerHeight;
+    tip.style.cssText=`top:${below?r.bottom+pad+10:r.top-pad-148}px;left:${Math.max(8,Math.min(r.left,window.innerWidth-276))}px;pointer-events:all;z-index:3;`;
+    document.getElementById('tour-next-btn').textContent=_tourIdx>=_TOUR.length-1?'Fertig ✓':'Weiter →';
+    wrap.classList.add('visible');
+    _tourHighlightRing(step.sel==='#my-radar');
+  },450);
 }
-function renderTutPage(){
-  document.querySelectorAll('.tut-page').forEach((p,i)=>p.classList.toggle('active',i===tutPage));
-  const dots=document.getElementById('tut-dots');
-  dots.innerHTML='';
-  for(let i=0;i<TUT_PAGES;i++){const d=document.createElement('div');d.className='tut-dot'+(i===tutPage?' active':'');dots.appendChild(d);}
-  document.getElementById('tut-back').style.opacity=tutPage===0?'0.3':'1';
-  document.getElementById('tut-next').textContent=tutPage===TUT_PAGES-1?'Los geht\'s →':'Weiter →';
+function _tourHighlightRing(on){
+  document.querySelectorAll('.ring-svg path').forEach(p=>{
+    p.setAttribute('fill', on ? getAccent()+'22' : 'var(--surface)');
+    p.setAttribute('stroke', on ? getAccent()+'77' : 'var(--border)');
+    p.setAttribute('stroke-width', on ? '1.5' : '1');
+  });
 }
-function tutNav(dir){
-  tutPage=Math.max(0,Math.min(TUT_PAGES-1,tutPage+dir));
-  if(tutPage===TUT_PAGES-1&&dir===1){ showScreen('screen-start'); return; }
-  renderTutPage();
+function tourNext(){_tourIdx++;if(_tourIdx>=_TOUR.length){tourSkip();return;}_tourShow();}
+function tourSkip(){
+  _tourHighlightRing(false);
+  document.getElementById('tour-wrap').classList.remove('visible');
+  localStorage.setItem('charlie_toured','1');
+  const dormant=document.getElementById('charlie-dormant-btn');
+  if(dormant&&_CHARLIE_PROFILE_SCREENS.has(_currentScreen)) dormant.classList.add('visible');
+}
+
+// ── SHARE LOCK ──
+function updateShareLock(){
+  const done=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
+  const btn=document.getElementById('btn-share-link');
+  const hint=document.getElementById('share-locked-hint');
+  if(btn){btn.disabled=!done;btn.style.opacity=done?'':'0.45';btn.style.cursor=done?'':'not-allowed';}
+  if(hint)hint.style.display=done?'none':'block';
 }
 
 // ══════════════════════════════════════
@@ -1372,6 +1975,7 @@ function readAvatarFile(file,target){
   reader.onload=ev=>{
     const url=ev.target.result;
     if(target==='new'){ newAvatarDataUrl=url; setAvatarPreview('avatar-preview-wrap',url); }
+    else if(target==='charlie'){ _charlieNewAvatar=url; const el=document.getElementById('ch-av-preview');if(el)el.innerHTML=`<img src="${url}">`; }
     else { editAvatarDataUrl=url; setAvatarPreview('edit-avatar-preview-wrap',url); }
   };
   reader.readAsDataURL(file);
@@ -1424,6 +2028,7 @@ function startPflicht(){
   pflIdx=0; pflScale=null;
   showScreen('screen-pflicht');
   renderPflicht();
+  if(_charlieFromTutorial) setTimeout(()=>stmtCharlieShow(),350);
 }
 
 function renderPflicht(){
@@ -1459,6 +2064,10 @@ function pflNext(){
   if(isLast){
     const allAnswered=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
     if(!allAnswered){ toast('Bitte beantworte noch alle Fragen – du kannst auch Enthaltung wählen.'); return; }
+    if(!_charliePflicht32Shown){
+      _charliePflicht32Shown=true;
+      setTimeout(()=>toast('Alle weiteren Antworten sind optional – du kannst deinen Link jetzt teilen 🎉'),400);
+    }
     startStatements();
   } else {
     pflIdx++; pflScale=null; renderPflicht();
@@ -1482,6 +2091,11 @@ function initEditProfile(){
   document.getElementById('ep-bio').value=p.bio||'';
   document.getElementById('ep-free').value=p.free||'';
   setEditPrivacy(p.privacyLevel||1);
+  _syncAllowGroupsBtn();
+  // render category visibility toggles
+  const grid=document.getElementById('hidden-cats-grid'); if(!grid) return;
+  _editHiddenCats=[...(state.hiddenCats||[])];
+  _renderCatSection(grid,_editHiddenCats,'editToggleCatIdx');
 }
 function setEditPrivacy(level){
   editPrivacyLevel=level;
@@ -1492,6 +2106,10 @@ function setEditPrivacy(level){
   document.getElementById('edit-warn-3').classList.toggle('visible',level>=3);
 }
 function saveEditProfile(){
+  const newHidden=[];
+  newHidden.push(..._editHiddenCats);
+  const catsChanged=JSON.stringify(newHidden.sort())!==JSON.stringify([...(state.hiddenCats||[])].sort());
+  if(catsChanged){ state.hiddenCats=newHidden; state.mainBubbleOrder=null; }
   state.profile={...state.profile, privacyLevel:editPrivacyLevel, avatarDataUrl:editAvatarDataUrl,
     age:document.getElementById('ep-age').value.trim(),
     city:document.getElementById('ep-city').value.trim(),
@@ -1585,12 +2203,12 @@ function renderCatProgress(){
 
 function renderStatement(){
   if(!state.shuffledOrder||!state.shuffledOrder.length) state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
-  const total=REGULAR_STATEMENTS.length, idx=state.currentIndex;
+  const vis=getVisibleStatements(), total=vis.length, idx=state.currentIndex;
   const stmt=currentStmt(); if(!stmt) return;
   document.getElementById('stmt-text').textContent=stmt.text;
   document.getElementById('stmt-hint').textContent=stmt.hint||'';
   document.getElementById('stmt-category').textContent=stmt.cat;
-  const answered=Object.keys(state.answers).length;
+  const answered=Object.keys(state.answers).filter(id=>vis.some(s=>s.id===id)).length;
   const pct=Math.round((answered/total)*100);
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-label').textContent=`${answered} beantwortet · ${idx+1}/${total} in Reihenfolge`;
@@ -1599,6 +2217,9 @@ function renderStatement(){
   document.querySelectorAll('.scale-btn').forEach(btn=>btn.classList.toggle('selected',parseInt(btn.dataset.val)===state.selectedScale));
   document.getElementById('btn-prev').style.opacity=idx===0?'0.3':'1';
   document.getElementById('btn-next').textContent=idx===total-1?'Fertig ✓':'Weiter →';
+  // show/hide abstain reason
+  const reasonWrap=document.getElementById('abstain-reason-wrap');
+  if(reasonWrap){ reasonWrap.style.display=state.selectedScale===0?'block':'none'; document.getElementById('abstain-reason').value=state.abstainReasons?.[stmt.id]||''; }
   renderCatProgress();
 }
 
@@ -1606,15 +2227,26 @@ let _stmtTimer=null;
 function selectScale(val){
   state.selectedScale=val;
   document.querySelectorAll('.scale-btn').forEach(btn=>btn.classList.toggle('selected',parseInt(btn.dataset.val)===val));
-  clearTimeout(_stmtTimer);
-  _stmtTimer=setTimeout(nextStatement,120);
+  const reasonWrap=document.getElementById('abstain-reason-wrap');
+  if(reasonWrap) reasonWrap.style.display=val===0?'block':'none';
+  if(val!==0){ clearTimeout(_stmtTimer); _stmtTimer=setTimeout(nextStatement,120); }
 }
 function nextStatement(){
   clearTimeout(_stmtTimer); _stmtTimer=null;
   const stmt=currentStmt();
-  if(state.selectedScale!==null) state.answers[stmt.id]=state.selectedScale;
+  if(state.selectedScale!==null){
+    state.answers[stmt.id]=state.selectedScale;
+    if(state.selectedScale===0){
+      const reason=document.getElementById('abstain-reason')?.value.trim();
+      if(reason){ if(!state.abstainReasons) state.abstainReasons={}; state.abstainReasons[stmt.id]=reason; }
+      else if(state.abstainReasons) delete state.abstainReasons[stmt.id];
+    }
+  }
+  const reasonWrap=document.getElementById('abstain-reason-wrap');
+  if(reasonWrap) reasonWrap.style.display='none';
   saveToStorage();
-  if(state.currentIndex>=REGULAR_STATEMENTS.length-1){ saveProfileToDB(); showScreen('screen-my-profile'); return; }
+  const vis=getVisibleStatements();
+  if(state.currentIndex>=vis.length-1){ saveProfileToDB(); showScreen('screen-my-profile'); return; }
   state.currentIndex++; state.selectedScale=null; renderStatement();
 }
 function prevStatement(){
@@ -1632,6 +2264,7 @@ function renderMyProfile(){
   const pflichtDone=PFLICHT_STATEMENTS.every(s=>state.answers[s.id]!==undefined);
   const btn=document.getElementById('btn-resume-pflicht');
   if(btn) btn.style.display=pflichtDone?'none':'block';
+  updateShareLock();
   document.getElementById('my-name-display').textContent=p.nickname;
   let meta=[];
   if(p.privacyLevel>=2){ if(p.age) meta.push(p.age+' J.'); if(p.city) meta.push(p.city); }
@@ -1640,7 +2273,7 @@ function renderMyProfile(){
   av.innerHTML=p.avatarDataUrl?`<img src="${p.avatarDataUrl}" alt="av">`:'🙂';
   const answered=Object.values(state.answers).filter(v=>v>0).length;
   document.getElementById('stat-answered').textContent=answered;
-  document.getElementById('stat-total').textContent=REGULAR_STATEMENTS.length;
+  document.getElementById('stat-total').textContent=getVisibleStatements().length;
   drawMyRadar();
 }
 
@@ -1682,11 +2315,11 @@ function drawMyRadar(){
   const canvas=document.getElementById('my-radar'); if(!canvas) return;
   const ctx=canvas.getContext('2d');
   const avgs=getCategoryAverages(state.answers);
-  // use saved main bubble order if available
-  if(!state.mainBubbleOrder||state.mainBubbleOrder.length!==CATEGORIES.length){
-    state.mainBubbleOrder=[...Array(CATEGORIES.length).keys()];
+  const visCats=getVisibleCategories();
+  if(!state.mainBubbleOrder||state.mainBubbleOrder.length!==visCats.length){
+    state.mainBubbleOrder=[...Array(visCats.length).keys()];
   }
-  const orderedCats=state.mainBubbleOrder.map(i=>CATEGORIES[i]);
+  const orderedCats=state.mainBubbleOrder.map(i=>visCats[i]);
   const labels=orderedCats;
   const ds=[{values:orderedCats.map(c=>avgs[c]||0),color:getAccent(),label:state.profile?.nickname||'Ich'}];
   drawRadar(ctx,300,labels,ds,'my-radar');
@@ -1694,8 +2327,9 @@ function drawMyRadar(){
   const popup=document.getElementById('my-stmt-popup');
   // create fake stmts array from categories for the overlay
   const catStmts=orderedCats.map((c,i)=>({id:'cat_'+i,text:c,cat:c,main:c}));
-  buildLabelOverlay(canvas,canvas._activeIdx||[],labels,catStmts,ds,popup,()=>{
-    const newOrder=catStmts.map(s=>CATEGORIES.indexOf(s.text));
+  const activeIdxM=labels.map((_,i)=>ds.some(d=>(d.values[i]||0)>0)?i:-1).filter(i=>i>=0);
+  buildLabelOverlay(canvas,activeIdxM,labels,catStmts,ds,popup,()=>{
+    const newOrder=catStmts.map(s=>visCats.indexOf(s.text));
     state.mainBubbleOrder=newOrder;
     saveToStorage();
     drawMyRadar();
@@ -1708,9 +2342,10 @@ function drawMyRadar(){
 function renderMyCatAccordion(){
   const acc=document.getElementById('my-cat-accordion'); acc.innerHTML='';
   if(!state.catOrder) state.catOrder={};
+  const visCats=getVisibleCategories();
   const orderedCats=_pinnedCat
-    ? [_pinnedCat,...CATEGORIES.filter(c=>c!==_pinnedCat)]
-    : CATEGORIES;
+    ? [_pinnedCat,...visCats.filter(c=>c!==_pinnedCat)]
+    : visCats;
   orderedCats.forEach(cat=>{
     // get base stmts (regular + pflicht combined)
     const base=[...PFLICHT_STATEMENTS.filter(s=>s.main===cat),...REGULAR_STATEMENTS.filter(s=>s.main===cat)];
@@ -1787,7 +2422,7 @@ function buildLabelOverlay(canvas,activeIdx,labels,stmts,datasets,popupEl,redraw
   const n=activeIdx.length;
   if(n<1)return;
   const step=(Math.PI*2)/n,start=-Math.PI/2;
-  const innerR=maxR+8, outerR=maxR+34, gap=0.05;
+  const innerR=maxR+20, outerR=maxR+46, gap=0.05;
 
   const svgNS='http://www.w3.org/2000/svg';
   const rSvg=document.createElementNS(svgNS,'svg');
@@ -1912,50 +2547,61 @@ function showCatPopup(popupEl,stmts,datasets,ai,swapping,onSwapToggle){
   popupEl.style.display='block';
 }
 
+const _radarAnimated=new Set();
 function drawRadar(ctx,size,labels,datasets,canvasId){
-  ctx.clearRect(0,0,size,size);
   const cx=size/2,cy=size/2;
-  const maxR=size*.30; // smaller radius to leave room for overlay buttons
-  // filter out enthaltungen: only keep labels where at least one dataset has value>0
+  const maxR=size*.30;
   const activeIdx=labels.map((_,i)=>datasets.some(ds=>(ds.values[i]||0)>0)?i:-1).filter(i=>i>=0);
   const n=activeIdx.length;
-  if(n<2){
-    ctx.fillStyle='#6b6b80';
-    ctx.font=`${Math.max(11,size*.04)}px 'Space Grotesk',sans-serif`;
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('Noch nicht genug Antworten',size/2,size/2-12);
-    ctx.fillText('für diese Bubble.',size/2,size/2+12);
-    if(ctx.canvas){ctx.canvas._axes=[];ctx.canvas._activeIdx=[];}
-    return;
+  function _render(progress){
+    ctx.clearRect(0,0,size,size);
+    const step=(Math.PI*2)/n,start=-Math.PI/2;
+    if(n<2){
+      ctx.fillStyle='#6b6b80';
+      ctx.font=`${Math.max(11,size*.04)}px 'Space Grotesk',sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('Noch nicht genug Antworten',size/2,size/2-12);
+      ctx.fillText('für diese Bubble.',size/2,size/2+12);
+      if(ctx.canvas){ctx.canvas._axes=[];ctx.canvas._activeIdx=[];}
+      return;
+    }
+    for(let r=1;r<=5;r++){
+      ctx.beginPath();
+      for(let i=0;i<=n;i++){const a=start+i*step,rr=maxR*(r/5);i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);}
+      ctx.closePath();ctx.strokeStyle='#2a2a32';ctx.lineWidth=1;ctx.stroke();
+    }
+    const axes=[];
+    for(let i=0;i<n;i++){
+      const a=start+i*step,ex=cx+Math.cos(a)*maxR,ey=cy+Math.sin(a)*maxR;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(ex,ey);ctx.strokeStyle='#2a2a3288';ctx.lineWidth=1;ctx.stroke();
+      axes.push({ex,ey});
+    }
+    if(ctx.canvas){ctx.canvas._axes=axes;ctx.canvas._activeIdx=activeIdx;}
+    datasets.forEach(ds=>{
+      const pts=activeIdx.map((ai,i)=>{const v=(ds.values[ai]||0)*progress,a=start+i*step;return{x:cx+Math.cos(a)*maxR*v,y:cy+Math.sin(a)*maxR*v,active:(ds.values[ai]||0)>0};});
+      ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
+      for(let i=0;i<n;i++){const p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];const cp1x=p1.x+(p2.x-p0.x)/BUBBLE_T,cp1y=p1.y+(p2.y-p0.y)/BUBBLE_T,cp2x=p2.x-(p3.x-p1.x)/BUBBLE_T,cp2y=p2.y-(p3.y-p1.y)/BUBBLE_T;ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,p2.x,p2.y);}
+      ctx.closePath();ctx.fillStyle=ds.color+'33';ctx.fill();ctx.strokeStyle=ds.color;ctx.lineWidth=2;ctx.stroke();
+      pts.forEach(p=>{if(!p.active)return;ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fillStyle=ds.color;ctx.fill();});
+    });
   }
-  const step=(Math.PI*2)/n,start=-Math.PI/2;
-  // rings
-  for(let r=1;r<=5;r++){
-    ctx.beginPath();
-    for(let i=0;i<=n;i++){const a=start+i*step,rr=maxR*(r/5);i===0?ctx.moveTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr):ctx.lineTo(cx+Math.cos(a)*rr,cy+Math.sin(a)*rr);}
-    ctx.closePath();ctx.strokeStyle='#2a2a32';ctx.lineWidth=1;ctx.stroke();
+  if(canvasId && !_radarAnimated.has(canvasId)){
+    _radarAnimated.add(canvasId);
+    const dur=600,startT=performance.now();
+    function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    function frame(now){
+      const p=Math.min((now-startT)/dur,1);
+      _render(ease(p));
+      if(p<1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  } else {
+    _render(1);
   }
-  // axes
-  const axes=[];
-  for(let i=0;i<n;i++){
-    const a=start+i*step,ex=cx+Math.cos(a)*maxR,ey=cy+Math.sin(a)*maxR;
-    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(ex,ey);ctx.strokeStyle='#2a2a3288';ctx.lineWidth=1;ctx.stroke();
-    axes.push({ex,ey});
-  }
-  if(ctx.canvas){ctx.canvas._axes=axes;ctx.canvas._activeIdx=activeIdx;}
-  // NO labels on canvas – rendered as overlay buttons
-  // datasets
-  datasets.forEach(ds=>{
-    const pts=activeIdx.map((ai,i)=>{const v=ds.values[ai]||0,a=start+i*step;return{x:cx+Math.cos(a)*maxR*v,y:cy+Math.sin(a)*maxR*v,active:v>0};});
-    ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
-    for(let i=0;i<n;i++){const p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];const cp1x=p1.x+(p2.x-p0.x)/6,cp1y=p1.y+(p2.y-p0.y)/6,cp2x=p2.x-(p3.x-p1.x)/6,cp2y=p2.y-(p3.y-p1.y)/6;ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,p2.x,p2.y);}
-    ctx.closePath();ctx.fillStyle=ds.color+'33';ctx.fill();ctx.strokeStyle=ds.color;ctx.lineWidth=2;ctx.stroke();
-    pts.forEach(p=>{if(!p.active)return;ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fillStyle=ds.color;ctx.fill();});
-  });
 }
 
 function drawStartRadar(){
-  const svg=document.getElementById('start-radar');
+  const svg=document.getElementById('start-radar'); if(!svg) return;
   const size=200,cx=100,cy=100,maxR=72,n=8,step=(Math.PI*2)/n,start=-Math.PI/2;
   const v1=[.7,.4,.9,.3,.6,.8,.5,.65],v2=[.5,.75,.4,.8,.35,.6,.9,.4];
   let html='';
@@ -1970,8 +2616,8 @@ function drawStartRadar(){
     let d=`M ${pts[0].x} ${pts[0].y}`;
     for(let i=0;i<n;i++){
       const p0=pts[(i-1+n)%n],p1=pts[i],p2=pts[(i+1)%n],p3=pts[(i+2)%n];
-      const cp1x=p1.x+(p2.x-p0.x)/6,cp1y=p1.y+(p2.y-p0.y)/6;
-      const cp2x=p2.x-(p3.x-p1.x)/6,cp2y=p2.y-(p3.y-p1.y)/6;
+      const cp1x=p1.x+(p2.x-p0.x)/3,cp1y=p1.y+(p2.y-p0.y)/3;
+      const cp2x=p2.x-(p3.x-p1.x)/3,cp2y=p2.y-(p3.y-p1.y)/3;
       d+=` C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p2.x} ${p2.y}`;
     }
     return d+'Z';
@@ -1988,7 +2634,8 @@ function drawStartRadar(){
 // ══════════════════════════════════════
 // PALETTE
 // ══════════════════════════════════════
-const COLOR_OPTIONS=['#00c8b4','#7b5ea7','#3b82f6','#f97316','#ef4444','#22c55e','#ec4899','#f59e0b','#a78bfa','#34d399','#e85555','#64748b'];
+const BUBBLE_T=4.5; // bezier tension divisor: lower = rounder, 6 = standard Catmull-Rom
+const COLOR_OPTIONS=['#00c8b4','#7b5ea7','#3b82f6','#f97316','#ef4444','#22c55e','#ec4899','#f59e0b','#e879f9','#84cc16','#0ea5e9','#94a3b8'];
 let selectedA='#00c8b4', selectedB='#7b5ea7';
 
 function getAccent(){ return selectedA; }
@@ -1997,13 +2644,17 @@ function getAccent2(){ return selectedB; }
 function hexA(hex,pct){
   return hex+Math.round(pct*255).toString(16).padStart(2,'0');
 }
-function applyColors(a,b){
-  selectedA=a; selectedB=b;
+const _DEFAULT_A='#00c8b4', _DEFAULT_B='#7b5ea7';
+function _setCssAccent(a,b){
   const r=document.documentElement.style;
   r.setProperty('--accent',a);   r.setProperty('--accent2',b);
   r.setProperty('--accent-a',hexA(a,.08));  r.setProperty('--accent-b',hexA(a,.13));
   r.setProperty('--accent2-a',hexA(b,.08)); r.setProperty('--accent2-b',hexA(b,.13));
   r.setProperty('--accent2-d',hexA(b,.25));
+}
+function applyColors(a,b){
+  selectedA=a; selectedB=b;
+  _setCssAccent(a,b);
   localStorage.setItem('gottcha_colors',JSON.stringify({a,b}));
   renderPaletteRow();
   drawStartRadar();
@@ -2064,9 +2715,11 @@ function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'
 // ══════════════════════════════════════
 // COMPARE
 // ══════════════════════════════════════
+let _pinnedCompareCat=null;
 function renderCompare(){
   if(!incomingProfile||!state.profile) return;
   const me=state.profile, other=incomingProfile.p;
+
   document.getElementById('compare-header').innerHTML=`
     <div class="compare-card" style="border:1px solid ${getAccent()}66">
       <div class="compare-avatar" style="border:2px solid var(--accent)">${me.avatarDataUrl?`<img src="${esc(me.avatarDataUrl)}">`:'🙂'}</div>
@@ -2089,28 +2742,54 @@ function renderCompare(){
   const emoji=score>=90?'❤️':score>=80?'🥰':score>=70?'😄':score>=60?'😊':score>=50?'🙂':score>=40?'😐':score>=30?'😟':score>=20?'😰':score>=10?'😱':'💀';
   document.getElementById('compat-emoji').textContent=emoji;
 
+  // main radar — same approach as drawMyRadar, two datasets
   const myAvgs=getCategoryAverages(myAns), otherAvgs=getCategoryAverages(otherAns);
-  const labels=Object.keys(myAvgs);
+  const visCats=getVisibleCategories();
+  if(!state.mainBubbleOrder||state.mainBubbleOrder.length!==visCats.length)
+    state.mainBubbleOrder=[...Array(visCats.length).keys()];
+  const orderedCats=state.mainBubbleOrder.map(i=>visCats[i]);
+  const labels=orderedCats;
+  const compareDs=[
+    {values:orderedCats.map(c=>myAvgs[c]||0),color:getAccent(),label:me.nickname},
+    {values:orderedCats.map(c=>otherAvgs[c]||0),color:getAccent2(),label:other.n},
+  ];
+  const catStmtsC=orderedCats.map((c,i)=>({id:'cat_'+i,text:c,cat:c,main:c}));
+  const activeIdxC=labels.map((_,i)=>compareDs.some(d=>(d.values[i]||0)>0)?i:-1).filter(i=>i>=0);
   const canvas=document.getElementById('compare-radar');
-  drawRadar(canvas.getContext('2d'),300,labels,[
-    {values:labels.map(l=>myAvgs[l]),color:getAccent()},
-    {values:labels.map(l=>otherAvgs[l]),color:getAccent2()},
-  ],'compare-radar');
+  drawRadar(canvas.getContext('2d'),300,labels,compareDs,'compare-radar');
+  const popup=document.getElementById('compare-stmt-popup');
+  buildLabelOverlay(canvas,activeIdxC,labels,catStmtsC,compareDs,popup,()=>{
+    state.mainBubbleOrder=catStmtsC.map(s=>visCats.indexOf(s.text));
+    saveToStorage(); renderCompare();
+  },(catName)=>{
+    _pinnedCompareCat=catName;
+    renderCompareCatAccordion();
+  });
 
-  const acc=document.getElementById('cat-accordion'); acc.innerHTML='';
-  const _catScoreList=[];
-  CATEGORIES.forEach(cat=>{
-    // use own saved order for this category
-    const base=REGULAR_STATEMENTS.filter(s=>s.main===cat);
-    const pflichtInCat=PFLICHT_STATEMENTS.filter(s=>s.main===cat);
-    const fullBase=[...pflichtInCat,...base];
+  renderCompareCatAccordion();
+  updateCountdown();
+  document.getElementById('btn-back-link').style.display=incomingProfile.returnFor?'none':'block';
+}
+
+function renderCompareCatAccordion(){
+  if(!incomingProfile||!state.profile) return;
+  const me=state.profile, other=incomingProfile.p;
+  const myAns=state.answers, otherAns=incomingProfile.a||{};
+  const acc=document.getElementById('compare-cat-accordion'); if(!acc) return;
+  acc.innerHTML='';
+  const visCats=getVisibleCategories();
+  const orderedCats=_pinnedCompareCat
+    ? [_pinnedCompareCat,...visCats.filter(c=>c!==_pinnedCompareCat)]
+    : visCats;
+  orderedCats.forEach(cat=>{
+    const base=[...PFLICHT_STATEMENTS.filter(s=>s.main===cat),...REGULAR_STATEMENTS.filter(s=>s.main===cat)];
     const savedOrder=state.catOrder?.[cat];
     let myStmts;
-    if(savedOrder&&savedOrder.length===fullBase.length){
-      const byId=Object.fromEntries(fullBase.map(s=>[s.id,s]));
-      myStmts=savedOrder.map(id=>byId[id]).filter(Boolean);
+    if(savedOrder&&savedOrder.length===base.length){
+      const byId=Object.fromEntries(base.map(s=>[s.id,s]));
+      myStmts=savedOrder.map(id=>byId[id]).filter(Boolean).map(s=>({...s}));
     } else {
-      myStmts=fullBase;
+      myStmts=base.map(s=>({...s}));
     }
     const myVals=myStmts.map(s=>{ const v=myAns[s.id]; return (v&&v>0)?v/5:0; });
     const catPrivMode=incomingProfile.catPrivacy?.[cat]||'full';
@@ -2125,21 +2804,20 @@ function renderCompare(){
     const sharedCat=myStmts.filter(s=>myAns[s.id]>0&&otherAns[s.id]>0);
     let diff=0; sharedCat.forEach(s=>diff+=Math.abs((myAns[s.id]||0)-(otherAns[s.id]||0)));
     const catScore=sharedCat.length>0?Math.round((1-diff/(sharedCat.length*4))*100):null;
-    if(catScore!==null) _catScoreList.push({cat,score:catScore});
-    const stmtLabels=myStmts.map(s=>s.text.slice(0,16)+'…');
+    const answeredMe=myStmts.filter(s=>myAns[s.id]>0).length;
     const cid2='cmpcat_'+cat.replace(/\W/g,'_');
     const pid2='cmppop_'+cat.replace(/\W/g,'_');
     const item=document.createElement('div'); item.className='cat-acc-item';
     item.innerHTML=`
       <div class="cat-acc-header" onclick="toggleAcc(this)">
         <span class="cat-acc-title">${cat}</span>
-        <span class="cat-acc-score">${catScore!==null?catScore+'%':'–'} <span style="margin-left:6px">▸</span></span>
+        <span class="cat-acc-score">${catScore!==null?catScore+'%':answeredMe+'/'+myStmts.length} <span style="margin-left:6px">▸</span></span>
       </div>
       <div class="cat-acc-body">
         <canvas id="${cid2}" width="320" height="320" style="display:block;margin:0 auto;cursor:default"></canvas>
         <button class="canvas-export-btn" onclick="downloadCanvas(document.getElementById('${cid2}'),'bubble-${cat.replace(/\\W/g,'-')}')">↓ Als Bild speichern</button>
         <div id="${pid2}" class="stmt-popup"></div>
-        <p style="font-size:.72rem;color:var(--muted);margin-top:6px;text-align:center">Tippe ein Statement an, um es ganz anzuzeigen · oder zwei Statements hintereinander, um deren Positionen zu tauschen</p>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:6px;text-align:center">Tippe eine Achse: Statement anzeigen · Zweite Achse: Tauschen</p>
         <div class="legend-row">
           <div style="display:flex;align-items:center;gap:6px;font-size:.75rem"><div class="legend-dot" style="background:var(--accent)"></div>${esc(me.nickname)}</div>
           <div style="display:flex;align-items:center;gap:6px;font-size:.75rem"><div class="legend-dot" style="background:var(--accent2)"></div>${esc(other.n)}${catPrivMode==='avg'?' (Ø)':''}</div>
@@ -2147,36 +2825,24 @@ function renderCompare(){
       </div>`;
     acc.appendChild(item);
     setTimeout(()=>{
-      const c2=document.getElementById(cid2);if(!c2)return;
+      const c2=document.getElementById(cid2); if(!c2) return;
       const popup2=document.getElementById(pid2);
       const stmtsCopy=myStmts.map(s=>({...s}));
       const lblArr2=stmtsCopy.map(s=>s.text.slice(0,16)+'…');
       const ds2=[{values:[...myVals],color:getAccent(),label:me.nickname},{values:[...otherVals],color:getAccent2(),label:other.n}];
       const redraw2=()=>{
         drawRadar(c2.getContext('2d'),320,lblArr2,ds2,cid2);
-        buildLabelOverlay(c2,c2._activeIdx||[],lblArr2,stmtsCopy,ds2,popup2,()=>{
+        const ai=lblArr2.map((_,i)=>ds2.some(d=>(d.values[i]||0)>0)?i:-1).filter(i=>i>=0);
+        buildLabelOverlay(c2,ai,lblArr2,stmtsCopy,ds2,popup2,()=>{
+          if(!state.catOrder) state.catOrder={};
           state.catOrder[cat]=stmtsCopy.map(s=>s.id);
-          saveToStorage();
-          redraw2();
+          saveToStorage(); redraw2();
         });
       };
       c2._redrawFn=redraw2;
       redraw2();
     },50);
   });
-
-  // compat report
-  if(_catScoreList.length>=2){
-    _catScoreList.sort((a,b)=>b.score-a.score);
-    const top=_catScoreList.slice(0,3), bot=[..._catScoreList].reverse().slice(0,3);
-    const bestEl=document.getElementById('compat-best'), worstEl=document.getElementById('compat-worst');
-    if(bestEl) bestEl.innerHTML=top.map(c=>`<div class="compat-report-item good">${c.cat} <b>${c.score}%</b></div>`).join('');
-    if(worstEl) worstEl.innerHTML=bot.map(c=>`<div class="compat-report-item bad">${c.cat} <b>${c.score}%</b></div>`).join('');
-    const rep=document.getElementById('compat-report'); if(rep) rep.style.display='block';
-  }
-
-  updateCountdown();
-  document.getElementById('btn-back-link').style.display=incomingProfile.returnFor?'none':'block';
 }
 
 function toggleAcc(header){
@@ -2224,9 +2890,9 @@ function decompressAnswers(str){
   return result;
 }
 
-function buildProfilePayload(){
+function buildProfilePayload(includeAvatar=false){
   const p=state.profile;
-  return {n:p.nickname,lv:p.privacyLevel,av:p.privacyLevel>=2?p.avatarDataUrl:null,ag:p.privacyLevel>=2?p.age:null,ci:p.privacyLevel>=2?p.city:null,bi:p.privacyLevel>=2?p.bio:null,fr:p.privacyLevel>=3?p.free:null};
+  return {n:p.nickname,lv:p.privacyLevel,av:(includeAvatar&&p.privacyLevel>=2)?p.avatarDataUrl:null,ag:p.privacyLevel>=2?p.age:null,ci:p.privacyLevel>=2?p.city:null,bi:p.privacyLevel>=2?p.bio:null,fr:p.privacyLevel>=3?p.free:null,alg:state.allowGroups!==false};
 }
 
 function doShare(){
@@ -2253,10 +2919,23 @@ function doShare(){
     qrImg.src=`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(shareUrl)}&bgcolor=${bg}&color=${fg}&format=png&qzone=2`;
     qrWrap.style.display='flex';
   }
-  if(navigator.share){ navigator.share({title:'Mein Gottcha',url:shareUrl}); }
-  else { navigator.clipboard.writeText(shareUrl).then(()=>toast('Link kopiert! 🎯')); }
+  _copyToClipboard(shareUrl,()=>toast('Link kopiert! 🎯'));
 }
-function copyShareLink(){ navigator.clipboard.writeText(shareUrl).then(()=>toast('Link kopiert! 🎯')); }
+function _copyToClipboard(text,onDone){
+  if(navigator.clipboard?.writeText){
+    navigator.clipboard.writeText(text).then(onDone).catch(()=>{
+      _fallbackCopy(text); onDone();
+    });
+  } else { _fallbackCopy(text); onDone(); }
+}
+function _fallbackCopy(text){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+function copyShareLink(){ _copyToClipboard(shareUrl,()=>toast('Link kopiert! 🎯')); }
 
 function sendBackLink(){
   if(!incomingProfile||!state.profile) return;
@@ -2266,8 +2945,7 @@ function sendBackLink(){
   const payload={v:2,token,returnFor:incomingProfile.p?.n,p:buildProfilePayload(),a:compressAnswers(state.answers),expiresAt:0,catPrivacy,catAvg};
   const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   const url=window.location.href.split('?')[0]+'?g='+encoded;
-  if(navigator.share){ navigator.share({title:'Mein Gottcha – Rücklink',url}); }
-  else { navigator.clipboard.writeText(url).then(()=>toast('Rücklink kopiert! 🎯')); }
+  _copyToClipboard(url,()=>toast('Rücklink kopiert! 🎯'));
 }
 
 // ══════════════════════════════════════
@@ -2291,7 +2969,10 @@ function exportEnthaltungen(){
     if(!stmts.length) return;
     found=true;
     lines.push(cat);
-    stmts.forEach(s=>lines.push('  – '+s.text));
+    stmts.forEach(s=>{
+      const reason=(state.abstainReasons||{})[s.id];
+      lines.push('  – '+s.text+(reason?' ['+reason+']':''));
+    });
     lines.push('');
   });
   const feedback=(textarea?.value||'').trim();
@@ -2315,7 +2996,7 @@ function _downloadBlob(data, filename){
 }
 function exportProfile(){
   const colors={a:selectedA,b:selectedB};
-  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null,colors},null,2);
+  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null,colors,abstainReasons:state.abstainReasons||{},hiddenCats:state.hiddenCats||[]},null,2);
   _downloadBlob(data,(state.profile?.nickname||'profil')+'.gottcha');
   toast('Gespeichert ✓');
 }
@@ -2352,6 +3033,8 @@ function loadProfile(e){
           state.answers=data.answers;
         }
         if(data.colors?.a && data.colors?.b) applyColors(data.colors.a, data.colors.b);
+        state.abstainReasons=data.abstainReasons||{};
+        state.hiddenCats=data.hiddenCats||[];
         state.currentIndex=Object.keys(state.answers).length;
         state.shuffledOrder=buildOrder(state.sortMode||'Zufall');
         saveToStorage(); saveProfileToDB();
@@ -2364,6 +3047,7 @@ function loadProfile(e){
             showScreen('screen-pflicht'); renderPflicht();
           } else {
             showScreen('screen-my-profile');
+            setTimeout(()=>charliePostLoad(),400);
           }
         }
         if(data.v && data.v >= CURRENT_VERSION) toast('Profil geladen ✓');
@@ -2407,18 +3091,18 @@ function showBeendenModal(){document.getElementById('beenden-modal').style.displ
 function hideBeendenModal(){document.getElementById('beenden-modal').style.display='none';}
 function beendenQuit(){
   clearSession();
-  localStorage.removeItem('gottcha_incoming');
-  incomingProfile=null;
+  localStorage.removeItem('gottcha_connections');
+  incomingProfile=null; _connections=[];
   hideBeendenModal();
   showScreen('screen-start');
 }
 function beendenSaveAndQuit(){
   const colors={a:selectedA,b:selectedB};
-  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null,colors},null,2);
+  const data=JSON.stringify({v:CURRENT_VERSION,profile:state.profile,answers:state.answers,catOrder:state.catOrder||{},mainBubbleOrder:state.mainBubbleOrder||null,colors,abstainReasons:state.abstainReasons||{},hiddenCats:state.hiddenCats||[]},null,2);
   _downloadBlob(data,(state.profile?.nickname||'profil')+'.gottcha');
   setTimeout(()=>{
     clearSession();
-    localStorage.removeItem('gottcha_incoming');
+    localStorage.removeItem('gottcha_connections');
     incomingProfile=null;
     hideBeendenModal();
     showScreen('screen-start');
@@ -2442,14 +3126,31 @@ document.addEventListener('DOMContentLoaded',()=>{
   loadPalette();
   checkIncomingLink();
   initStart();
-  // migrate existing localStorage profile into IndexedDB on first load
   if(state.profile?.nickname) saveProfileToDB();
   renderSavedProfiles();
+  _startCharlieLoop();
+  window.addEventListener('storage',e=>{
+    if(e.key==='gottcha_connections'&&state.profile?.nickname){
+      checkAndLoadIncoming();
+      if(_currentScreen==='screen-connections') renderConnections();
+      else { toast('Neue Verbindung eingegangen!'); }
+    }
+  });
 });
+const _CHARLIE_PROFILE_SCREENS=new Set(['screen-my-profile','screen-pflicht','screen-statements','screen-review','screen-share','screen-compare','screen-edit-profile','screen-cat-privacy','screen-connections','screen-group']);
+const _NO_COLOR_SCREENS=new Set(['screen-start','screen-charlie','screen-profile']);
 const _showScreen=showScreen;
 window.showScreen=function(id){
   _showScreen(id);
-  if(id==='screen-tutorial') initTutorial();
+  _currentScreen=id;
+  if(id==='screen-charlie'||id==='screen-start') _startCharlieLoop();
+  if(id==='screen-my-profile') updateShareLock();
+  const dormant=document.getElementById('charlie-dormant-btn');
+  const hasProfile=!!state.profile?.nickname;
+  const showDormant=hasProfile && _CHARLIE_PROFILE_SCREENS.has(id);
+  if(dormant) dormant.classList.toggle('visible', showDormant);
+  if(showDormant) _startCharlieLoop();
+  _setCssAccent(_NO_COLOR_SCREENS.has(id)?_DEFAULT_A:selectedA, _NO_COLOR_SCREENS.has(id)?_DEFAULT_B:selectedB);
 };
 </script>
 </body>
